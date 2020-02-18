@@ -1,0 +1,90 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/layui-v2.5.6/layui/css/layui.css" rel="stylesheet" />
+    <title>EditBrand</title>
+</head>
+<body>
+    <div class="layui-fluid">
+        <form class="layui-form " style="margin-top:15px;" lay-filter="brandinfo" action="/Group/SaveBrand">
+            <div class="layui-form-item">
+                <label class="layui-form-label">品牌编号</label>
+                <div class="layui-input-block">
+                    <input type="text" name="BrandNo" required autocomplete="off" class="layui-input" />
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">品牌名称</label>
+                <div class="layui-input-block">
+                    <input type="text" name="BrandName" required autocomplete="off" class="layui-input" />
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">拼音</label>
+                <div class="layui-input-block">
+                    <input type="text" name="Spell" required autocomplete="off" class="layui-input" readonly="readonly" />
+                </div>
+            </div>
+            <label class="layui-form-label">启用</label>
+            <div class="layui-input-block">
+                <input type="checkbox" name="Using" lay-skin="switch" lay-text="启用|停用">
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">备注</label>
+                <div class="layui-input-block">
+                    <input type="text" name="Comment" required autocomplete="off" class="layui-input" />
+                </div>
+            </div>
+            <div class="layui-form-item" style="display:none">
+                <label class="layui-form-label">Id</label>
+                <div class="layui-input-block">
+                    <input type="text" name="Id" required autocomplete="off" class="layui-input" />
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <input class="layui-btn layui-btn-normal" onclick="save()" value="保存" />
+                    <input class="layui-btn layui-btn-primary" onclick="cancel();" value="取消" />
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script src="~/Content/themes/jquery2.1.1.min.js"></script>
+    <script src="~/Content/layui-v2.5.6/layui/layui.js"></script>
+    <script>
+        var form;
+        $(function () {
+            layui.use('form', function () {
+                form = layui.form;
+                form.val('brandinfo', {
+                    "BrandNo": parent.selectedData.BrandNo,
+                    "BrandName": parent.selectedData.BrandName,
+                    "Spell": parent.selectedData.Spell,
+                    "Using": parent.selectedData.UsingValue == "是",
+                    "Comment": parent.selectedData.Comment,
+                    "Id": parent.selectedData.Id
+                })
+            })
+        })
+
+        function save() {
+            var data = form.val('brandinfo');
+            data.Using = data.Using == "on" ? true : false;
+            $.post("/Group/SaveBrand", data, function (ret) {
+                alertS(ret.msg);
+            })
+        }
+
+        function cancel() {
+            parent.layer.closeAll();
+        }
+    </script>
+</body>
+</html>

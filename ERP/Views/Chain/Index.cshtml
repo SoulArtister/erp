@@ -1,0 +1,217 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<div style="padding: 20px; background-color: #F2F2F2;">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header">分店</div>
+                <div class="layui-card-body">
+                    <form class="layui-form">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">选择分店</label>
+                            <div class="layui-input-block">
+                                <select id="sltOrg" name="orgs" lay-verify="required" lay-search="">
+                                    <option value="">=选择分店=</option>
+                                    @{
+
+                                        foreach (var item in ViewBag.Orgs)
+                                        {
+                                            <option value="@item.OrgId">@item.OrgName</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block ">
+                                <input type="button" id="btnenterorg" class="layui-btn layui-btn-normal" value="进入分店" />
+                                <input type="button" id="btnaddorg" class="layui-btn" value="新增分店" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header">基本设置</div>
+                <div class="layui-card-body">
+                    <form class="layui-form">
+                        <div class="layui-form-item">
+                            <div class="layui-col-xs6">
+                                <label class="layui-form-label">商户编号</label>
+                                <div class="layui-col-xs6  layui-input-inline">
+                                    <input type="text" id="txtchainno" autocomplete="off" class="layui-input" readonly="readonly" value="@ViewBag.Chain.ChainOrgId" />
+                                </div>
+                            </div>
+                            <div class="layui-col-xs6">
+                                <label class=" layui-form-label">
+                                    商户名称
+                                </label>
+                                <div class="layui-col-xs6  layui-input-block">
+                                    <input type="text" id="txtchainname" autocomplete="off" class="layui-input" value="@ViewBag.Chain.ChainOrgName" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-col-xs6">
+                                <label class="layui-form-label">制单日期</label>
+                                <div class=" layui-input-block">
+                                    @if (ViewBag.Chain.DateSetting == 0)
+                                    {
+                                        <input type="radio" name="dateset" value="0" title="当前日期" checked>
+                                        <input type="radio" name="dateset" value="1" title="营业日期">
+                                    }
+                                    else
+                                    {
+                                        <input type="radio" name="dateset" value="0" title="当前日期">
+                                        <input type="radio" name="dateset" value="1" title="营业日期" checked>
+                                    }
+                                </div>
+                            </div>
+                            <div class="layui-col-xs6">
+                                <label class="layui-form-label">财务系统Url</label>
+                                <div class="layui-col-xs6  layui-input-block">
+                                    <input type="text" id="txtchainurl" required autocomplete="off" class="layui-input" value="@ViewBag.Chain.InterfaceUrl" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block ">
+                                <input type="button" id="btnsavechaininfo" class="layui-btn" value="保存" onclick="saveChain()" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="layui-card">
+                <div class="layui-card-header">接口访问足迹</div>
+                <div class="layui-card-body">
+                    <form class="layui-form">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">时间段</label>
+                            <div class="layui-input-inline">
+                                <select name="ts" lay-filter="ts">
+                                    <option value="0">本月</option>
+                                    <option value="1">上个月</option>
+                                    <option value="2">今年</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <div id="trips" class="mychart"></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Content/themes/jquery-1.9.1.js"></script>
+<script src="~/Content/layui-v2.4.5/layui/layui.js"></script>
+<script>
+    $(function () {
+        layui.use('form', function () {
+            var form = layui.form;
+            loadCounts();
+
+            form.on('select(ts)', function () {
+                loadCounts();
+            });
+        });
+
+        function loadCounts() {
+            var value = $("select[name='ts']").val();
+            var unit = '号';
+            if (value == 2)
+                unit = '月';
+            $.ajax({
+                url: '/Chain/GetCountData',
+                method: 'post',
+                data: { "ts": value },
+                success: function (ret) {
+                    if (ret.err.length == 0 && ret.data) {
+                        var myChart = echarts.init(document.getElementById('trips'), 'shine');
+                        var datas = ret.data.split(',');
+                        var xdata = [];
+                        for (var i = 0; i < datas.length; i++)
+                            xdata.push((i + 1).toString() + unit);
+                        var option = {
+                            xAxis: {
+                                type: 'category',
+                                data: xdata
+                            },
+                            yAxis: {},
+                            series: [{
+                                data: datas,
+                                type: 'line',
+                                smooth: true
+                            }]
+                        };
+                        myChart.setOption(option);
+                    }
+                }
+            });
+        }
+
+
+        $("#btnaddorg").click(function () {
+            parent.layer.open({
+                title: "新增分店",
+                type: 2,
+                area: ['580px', '540px'],
+                fixed: false, //不固定
+                maxmin: false,
+                content: '/Chain/NewOrg?chainNo=' + $("#txtchainno").val() + '&url=' + $("#txtchainurl").val()
+            });
+        });
+
+        $("#btnenterorg").click(function () {
+            var selectOrgId = $("#sltOrg").val();
+            var selectOrgName = $("#sltOrg").find("option:selected").text();
+            var indexView = '@ViewBag.OrgIndex';
+            if (selectOrgId && selectOrgId.length > 0) {
+                $.ajax({
+                    url: "/Chain/EnterOrg",
+                    data: { orgId: selectOrgId, orgName: selectOrgName },
+                    type: "post",
+                    dataType: "json",
+                    success: function (data) {
+                        if (data == "") {
+                            window.location.href = indexView;
+                        }
+                        else {
+                            alertF(data);
+                        }
+                    }
+                });
+            }
+        });
+    })
+
+    //保存商户信息
+    function saveChain() {
+        var chain = {};
+        chain.Id = '@ViewBag.chain.Id';
+        chain.ChainOrgName = $("#txtchainname").val();
+        chain.DateSetting = $("input[name='dateset']:checked").val();
+        chain.InterfaceUrl = $("#txtchainurl").val();
+        $.ajax({
+            url: '/Chain/PostChainInfo',
+            method: 'post',
+            contentType: 'application/json',
+            data: JSON.stringify(chain),
+            success: function (ret) {
+                if (ret.length == 0) {
+                    alertS("提交成功");
+                }
+                else {
+                    alertF(ret);
+                }
+            }
+        });
+    }
+</script>

@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Interfaces>
+  <TPlus>
+    <No>1001</No>
+    <AppKey>77f26e6d-5829-41c3-b23a-94fd4322d929</AppKey>
+    <AppSecret>arblw6</AppSecret>
+    <ClassName>ERPLibrary.InterfaceTPlus</ClassName>
+	<DefaultUrl></DefaultUrl>
+  </TPlus>
+</Interfaces>

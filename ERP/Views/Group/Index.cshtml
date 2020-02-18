@@ -1,0 +1,190 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/layui-v2.5.6/layui/css/layui.css" rel="stylesheet" />
+    <title>Index</title>
+</head>
+<body style="margin-top:50px">
+    <div style="padding:0 15px;background-color: #F2F2F2;">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-md12">
+                <div class="layui-card">
+                    <div class="layui-card-header">集团名称</div>
+                    <div class="layui-card-body">
+                        <form class="layui-form">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">集团名称</label>
+                                <div class="layui-input-block">
+                                    <input type="text" id="txtgname" autocomplete="off" class="layui-input" style="width:60%" value="@ViewBag.GroupName" />
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-input-block ">
+                                    <input type="button" onclick="savegname()" class="layui-btn layui-btn-normal" value="保存" />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md12">
+                <div class="layui-card">
+                    <div class="layui-card-header">品牌</div>
+                    <div class="layui-card-body">
+                        <form class="layui-form">
+                            <div class="layui-form-item">
+                                <div class="layui-inline">
+                                    <div class="layui-input-block" style="margin-left:1px;">
+                                        <button type="button" class="layui-btn layui-btn-normal" onclick="add()">新增</button>
+                                        <button type="button" class="layui-btn" onclick="edit()">修改</button>
+                                        <button type="button" class="layui-btn layui-btn-danger" onclick="del()">删除</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <table lay-filter="brands" lay-data="{id: 'datas'}">
+                            <thead>
+                                <tr>
+                                    <th lay-data="{ type: 'radio', width: 70 }"></th>
+                                    <th lay-data="{field:'Index', width:80}">序号</th>
+                                    <th lay-data="{field:'BrandNo', width:100}">编号</th>
+                                    <th lay-data="{field:'BrandName', width:130}">名称</th>
+                                    <th lay-data="{field:'Spell', width:130}">拼音</th>
+                                    <th lay-data="{field:'Comment', width:190}">备注</th>
+                                    <th lay-data="{field:'UsingValue', width:90}">启用</th>
+                                    <th lay-data="{ field: 'Id', title: '', width: 0, hide: true }"></th>
+                                </tr>
+                            </thead>
+                            <tbody id="datas"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/Content/themes/jquery2.1.1.min.js"></script>
+    <script src="~/Content/layui-v2.5.6/layui/layui.js"></script>
+    <script>
+        var selectedData = {};
+        var table;
+        $(function () {
+            layui.use( 'form', function () {
+                var form = layui.form;
+            })
+            loaddata();
+        })
+
+        //加载数据
+        function loaddata() {
+            var length = 0;
+            //设为同步
+            $.ajaxSettings.async = false;
+            $.post('/Group/Brands', {}, function (ret) {
+                if (ret) {
+                    length = ret.data.length;
+                    var tabled = document.getElementById("datas");
+                    $(table).empty();
+                    var htmls = "";
+                    for (var i = 0; i < ret.data.length; i++) {
+                        var obj = ret.data[i];
+                        var tds = "<td></td><td>" + (i + 1) + "</td>";
+                        tds += "<td>" + obj.BrandNo + "</td>";
+                        tds += "<td>" + obj.BrandName + "</td>";
+                        tds += "<td>" + obj.Spell + "</td>";
+                        tds += "<td >" + obj.Comment + "</td>";
+                        tds += "<td >" + obj.UsingValue + "</td>";
+                        tds += "<td >" + obj.Id + "</td>";
+                        htmls += "<tr>" + tds + "</tr>";
+                    }
+                    $(tabled).html(htmls);
+                }
+            })
+            $.ajaxSettings.async = true;
+
+            layui.use('table', function () {
+                table = layui.table;
+                //转换静态表格
+                table.init("brands", {
+                    height: 'full-235' //设置高度
+                  , limit: length //注意：请务必确保 limit 参数（默认：10）是与服务端限定的数据条数一致
+                  , even: true //开启隔行背景
+                  , size: 'sm' //小尺寸的表格
+                });
+                table.on('rowDouble(brands)', function (obj) {
+                    selectedData = obj.data;
+                    layer.open({
+                        title: "修改",
+                        type: 2,
+                        area: ['500px', '550px'],
+                        fixed: false, //不固定
+                        maxmin: false,
+                        content: '/Group/EditBrand'
+                    });
+                })
+            });
+        }
+
+        //保存集团名称
+        function savegname() {
+            $.post('/Group/SaveGroupName', { "groupName": $("#txtgname").val() }, function (ret) {
+                if (ret.code < 0) {
+                    alertF(ret.data);
+                }
+                else {
+                    alertS(ret.data);
+                }
+            })
+        }
+
+        //新增
+        function add() {
+            selectedData = {};
+            selectedData.Id = 0;
+            layer.open({
+                title: "新增",
+                type: 2,
+                area: ['500px', '550px'],
+                fixed: false, //不固定
+                maxmin: false,
+                content: '/Group/EditBrand'
+            });
+        }
+
+        //修改
+        function edit() {
+            var datas = table.checkStatus('datas');
+            if (!datas || datas.data.length > 1 || datas.data.length == 0) {
+                alertW("请选择一条数据！");
+                return;
+            }
+            selectedData=datas.data[0];
+            layer.open({
+                title: "修改",
+                type: 2,
+                area: ['500px', '550px'],
+                fixed: false, //不固定
+                maxmin: false,
+                content: '/Group/EditBrand'
+            });
+        }
+
+        //修改
+        function del() {
+            var datas = table.checkStatus('datas');
+            if (!datas || datas.data.length > 1 || datas.data.length == 0) {
+                alertW("请选择一条数据！");
+                return;
+            }
+            var id = datas.data[0].Id;
+            $.post("/Group/DeleteBrand", { "id": id }, function (ret) {
+                alertS(ret.msg);
+            })
+        }
+    </script>
+</body>
+</html>

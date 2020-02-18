@@ -1,0 +1,115 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link href="~/Content/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
+    <title>新增分店</title>
+</head>
+<body>
+    <div class="layui-fluid">
+        <form class="layui-form " style="margin-top:15px;">
+            <div class="layui-form-item">
+                <label class="layui-form-label">商户编号</label>
+                <div class="layui-input-block">
+                    <input type="text" name="title" required autocomplete="off" class="layui-input" id="txtChainNo" value="@ViewBag.ChainNo" />
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">分店Id</label>
+                <div class="layui-input-block">
+                    <input type="text" name="title" required autocomplete="off" class="layui-input" id="txtOrgId" />
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">分店名称</label>
+                <div class="layui-input-block">
+                    <input type="text" name="title" required autocomplete="off" class="layui-input" id="txtOrgName" />
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">账套</label>
+                <div class="layui-input-block">
+                    <input type="text" name="title" required autocomplete="off" class="layui-input" id="txtAccount" />
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">用户名</label>
+                <div class="layui-input-block">
+                    <input type="text" name="title" required autocomplete="off" class="layui-input" id="txtUser" />
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">密码</label>
+                <div class="layui-input-block">
+                    <input type="text" name="title" required autocomplete="off" class="layui-input" id="txtPass" />
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">机构类型</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="orgtype" value="0" title="分店" checked>
+                    <input type="radio" name="orgtype" value="1" title="中心">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <input class="layui-btn layui-btn-normal" id="" onclick="Save()" value="保存" />
+                    <input class="layui-btn layui-btn-primary" onclick="cancel();" value="取消" />
+                </div>
+            </div>
+        </form>
+    </div>
+    <script src="~/Content/themes/jquery-1.9.1.js"></script>
+    <script src="~/Content/layui-v2.4.5/layui/layui.js"></script>
+    <script>
+        $(function () {
+            layui.use('form', function () {
+                var form = layui.form;
+            });
+        });
+
+        //保存
+        function Save() {
+            var entity = {};
+            entity.ChainOrgId = $("#txtChainNo").val();
+            entity.OrgId = $("#txtOrgId").val();
+            entity.OrgName = $("#txtOrgName").val();
+            entity.AccountNum = $("#txtAccount").val();
+            entity.UserName = $("#txtUser").val();
+            var pass = $("#txtPass").val();
+            if (!pass && pass.length == 0)
+                pass = '';
+            entity.UPassword = pass;
+            entity.IsCK = $("input[name='orgtype']:checked").val();
+
+            $.ajax({
+                type: "POST",
+                url: "/Chain/PostNewOrg",
+                data: JSON.stringify(entity),
+                contentType: "application/json",
+                success: function (data) {
+                    if (data == "0")
+                        parent.alertS("成功", function () {
+                            parent.layer.closeAll();
+                        });
+                    else
+                        parent.alertF(data);
+                },
+                error: function (e) {
+                    parent.alertF("error" + e.responseText);
+                }
+            });
+        }
+
+        function cancel() {
+            parent.layer.closeAll();
+        }
+    </script>
+</body>
+</html>

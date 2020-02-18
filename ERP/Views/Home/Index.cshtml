@@ -1,0 +1,160 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="icon" href="~/Content/themes/images/user.ico" type="image/x-icon" />
+    <link href="~/Content/layui-v2.5.6/layui/css/layui.css" rel="stylesheet" />
+    <link href="~/Content/main.css" rel="stylesheet" />
+    <title>hoc erp</title>
+</head>
+<body class="layui-body">
+    <div id="LAY_app">
+        <div class="layui-layout layui-layout-admin">
+            <div class="layui-header">
+                <!-- 头部区域 -->
+                <!--左边-->
+                <ul class="layui-nav layui-layout-left">
+                    <li class="layui-nav-item layadmin-flexible" lay-unselect>
+                        <a href="javascript:;" layadmin-event="flexible" title="菜单伸缩">
+                            <i class="layui-icon layui-icon-shrink-right" id="LAY_app_flexible"></i>
+                        </a>
+                    </li>
+                    <li class="layui-nav-item layadmin-flexible layui-unselect">
+                        <a href="javascript:;" title="集团名称">
+                            <i class="layui-icon layui-icon-group" id="uname">  </i>
+                        </a>
+                    </li>
+                </ul>
+                <!--右边-->
+                <ul class="layui-nav layui-layout-right" lay-filter="layadmin-layout-right">
+                    <li class="layui-nav-item" lay-unselect="">
+                        <a href="javascript:void(0);" onclick="refreshIframe()" title="刷新">
+                            <i class="layui-icon layui-icon-refresh-3"></i>
+                        </a>
+                    </li>
+                    <li class="layui-nav-item">
+                    </li>
+                    <li class="layui-nav-item layui-hide-xs" lay-unselect>
+                        <a href="javascript:;" id="aexit"><i class="layui-icon layui-icon-radio" style="color:#cf1616;"></i> 退出</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- 侧边菜单 -->
+            <div class="layui-side layui-side-menu">
+                <div class="layui-side-scroll">
+                    <a class="layui-logo" href="~/Login/Index">
+                        <span>Hoc ERP</span>
+                    </a>
+                    <ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu" lay-filter="layadmin-system-side-menu">
+                        @{
+                            var list = ERP.Infrastructure.Common.WebHelper.GetSessionList<ERP.Domain.Entity.Menu>("menus");
+                            foreach (var item in list.Where(i => i.ParentId == 0))
+                            {
+                                var lid = "menu" + item.Id;
+                                <li id="@lid" data-name="@item.Icon" class="layui-nav-item">
+                                    <a href="javascript:void(0);" lay-tips="@item.UrlRoute" lay-direction="2" onclick="gotoPage('@item.Id', '@item.UrlRoute', '@item.MenuName')">
+                                        <i class="layui-icon layui-icon-home"></i>
+                                        <cite>@item.MenuName</cite>
+                                    </a>
+                                    @{
+                                var childs = list.Where(i => i.ParentId == item.Id).ToList();
+                                if (childs != null && childs.Count > 0)
+                                {
+                                    <dl class="layui-nav-child">
+                                        @foreach (var c in childs)
+                                        {
+                                            var did = "menu" + c.Id;
+                                            <dd data-name="console" id="@did">
+                                                <a lay-href="javascript:void(0);" onclick="gotoPage('@c.Id', '@c.UrlRoute', '@c.MenuName')">@c.MenuName</a>
+                                            </dd>
+                                        }
+                                    </dl>
+                                }
+                                    }
+                                </li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 页面标签 -->
+            <div class="layadmin-pagetabs" id="LAY_app_tabs">
+                <div class="layui-icon layadmin-tabs-control layui-icon-prev" layadmin-event="leftPage"></div>
+                <div class="layui-icon layadmin-tabs-control layui-icon-next" layadmin-event="rightPage"></div>
+                <div class="layui-icon layadmin-tabs-control layui-icon-down">
+                    <ul class="layui-nav layadmin-tabs-select" lay-filter="layadmin-pagetabs-nav">
+                        <li class="layui-nav-item" lay-unselect>
+                            <a href="javascript:;"></a>
+                            <dl class="layui-nav-child layui-anim-fadein">
+                                <dd layadmin-event="closeThisTabs"><a href="javascript:;">关闭当前标签页</a></dd>
+                                <dd layadmin-event="closeOtherTabs"><a href="javascript:;">关闭其它标签页</a></dd>
+                                <dd layadmin-event="closeAllTabs"><a href="javascript:;">关闭全部标签页</a></dd>
+                            </dl>
+                        </li>
+                    </ul>
+                </div>
+                <div class="layui-tab" lay-unauto lay-allowclose="true" lay-filter="layadmin-layout-tabs">
+                    <ul class="layui-tab-title" id="LAY_app_tabsheader">
+                        <li onclick="selectTab(this)" lay-id="0" lay-attr="/Home/Home" class="layui-this"><i class="layui-icon layui-icon-home"></i></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 主体内容 -->
+            <div class="layui-body" id="LAY_app_body">
+                <div id="ifmdiv0" style="overflow-y:scroll" class="layadmin-tabsbody-item layui-show">
+                    <iframe src='/Home/Home' frameborder='0' class='layadmin-iframe'></iframe>
+                </div>
+            </div>
+            <div class="layui-footer" style="height:30px;">
+                <!-- 底部固定区域 -->
+                &copy; 好食好客-@DateTime.Now.Year
+            </div>
+
+        </div>
+    </div>
+    <script src="~/Content/themes/jquery2.1.1.min.js"></script>
+    <script src="~/Content/layui-v2.5.6/layui/layui.js"></script>
+    <script src="~/Content/home.js"></script>
+    <script>
+        $(function () {
+            var unname = '@ERP.Infrastructure.Common.WebHelper.GetSession("username")';
+            $("#uname").text(unname);
+
+            $("#LAY_app_flexible").parent().click(function () {
+                if ($("#LAY_app").hasClass("layadmin-side-shrink")) {
+                    $("#LAY_app").removeClass("layadmin-side-shrink");
+                    $("#LAY_app_flexible").removeClass("layui-icon-spread-left");
+                    $("#LAY_app_flexible").addClass("layui-icon-shrink-right");
+                }
+                else {
+                    $("#LAY_app").addClass("layadmin-side-shrink");
+                    $("#LAY_app_flexible").removeClass("layui-icon-shrink-right");
+                    $("#LAY_app_flexible").addClass("layui-icon-spread-left");
+                }
+
+            })
+
+            //退出
+            $("#aexit").click(function () {
+                window.history.forward(2);
+                window.location.replace("../../Login/Index");
+                $("#")
+            });
+
+            layui.use(['layer', 'form', 'element'], function () {
+                var layer = layui.layer,
+                       form = layui.form,
+                       element = layui.element;
+            });
+        });
+    </script>
+</body>
+</html>

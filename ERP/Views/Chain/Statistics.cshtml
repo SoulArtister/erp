@@ -1,0 +1,110 @@
+﻿@{
+    ViewBag.Title = "Statistics";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div style="padding: 20px; background-color: #F2F2F2;">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md8">
+            <div class="layui-card">
+                <div class="layui-card-header">凭证未做统计</div>
+                <div class="layui-card-body">
+                    <form class="layui-form">
+                        <div class="layui-form-item">
+                            <div class="layui-input-inline">
+                                <select name="ts" lay-filter="ts">
+                                    <option value="0">本月</option>
+                                    <option value="1">上个月</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                    <table id="datas" lay-filter="dt"></table>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md4">
+            <div class="layui-card">
+                <div class="layui-card-header">原因分析</div>
+                <div class="layui-card-body">
+                    <form class="layui-form">
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <textarea id="reason" name="desc" placeholder="" class="layui-textarea" readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/html" id="toolbars">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="see">查看原因</button>
+    </div>
+</script>
+<script src="~/Content/themes/jquery-1.9.1.js"></script>
+<script src="~/Content/layui-v2.4.5/layui/layui.js"></script>
+<script>
+    $(function () {
+        QueryData();
+
+        layui.use('form', function () {
+            var form = layui.form;
+            form.on('select(ts)', function () {
+                QueryData();
+            });
+        });
+    });
+
+    //查询统计数据
+    function QueryData() {
+        layui.use('table', function () {
+            var table = layui.table;
+
+            table.render({
+                elem: '#datas'
+              , toolbar: '#toolbars'
+              , height: 'full-215'
+              , url: '/Chain/GetStatistics' //数据接口
+              , where: { ts: $("select[name='ts']").val() }
+              , method: 'post'
+              , page: true //开启分页
+              , cols: [[ //表头
+                  { type: 'radio', width: 70, fixed: 'left' }
+                 ,{ field: 'RowNum', title: '营业日序号', width: 100, fixed: 'left' }
+                , { field: 'OrgName', title: '分店名称', width: 170 }
+                , { field: 'BusinessDate', title: '营业日', width: 200, }
+                , { field: 'Base_Account', title: '', width: 0, hide: true }
+              ]]
+              , id: 'id'
+            });
+
+            //监听事件
+            table.on('toolbar(dt)', function (obj) {
+                var checkStatus = table.checkStatus('id');
+                if (checkStatus.data.length > 1) {
+                    alertW("只能选择一条数据");
+                    return;
+                }
+                if(obj.event!='see') {
+                    return;
+                }
+                var id = checkStatus.data[0].Base_Account;
+                var busDate = checkStatus.data[0].BusinessDate
+                $.ajax({
+                    url: '/Chain/GetStatisticErrInfo?baseAccountId=' + id + '&bussinessDate=' + busDate,
+                    method: "get",
+                    success: function (ret) {
+                        if (ret)
+                        {
+                            $("#reason").val(ret);
+                        }
+                    }
+                })
+            });
+        });
+    }
+
+
+</script>
