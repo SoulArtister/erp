@@ -73,7 +73,7 @@
         var selectedData = {};
         var table;
         $(function () {
-            layui.use( 'form', function () {
+            layui.use('form', function () {
                 var form = layui.form;
             })
             loaddata();
@@ -86,12 +86,12 @@
             $.ajaxSettings.async = false;
             $.post('/Group/Brands', {}, function (ret) {
                 if (ret) {
-                    length = ret.data.length;
+                    length = ret.Data.length;
                     var tabled = document.getElementById("datas");
                     $(table).empty();
                     var htmls = "";
-                    for (var i = 0; i < ret.data.length; i++) {
-                        var obj = ret.data[i];
+                    for (var i = 0; i < ret.Data.length; i++) {
+                        var obj = ret.Data[i];
                         var tds = "<td></td><td>" + (i + 1) + "</td>";
                         tds += "<td>" + obj.BrandNo + "</td>";
                         tds += "<td>" + obj.BrandName + "</td>";
@@ -132,11 +132,11 @@
         //保存集团名称
         function savegname() {
             $.post('/Group/SaveGroupName', { "groupName": $("#txtgname").val() }, function (ret) {
-                if (ret.code < 0) {
-                    alertF(ret.data);
+                if (ret.Code < 0) {
+                    alertF(ret.Msg);
                 }
                 else {
-                    alertS(ret.data);
+                    alertS(ret.Msg);
                 }
             })
         }
@@ -162,7 +162,7 @@
                 alertW("请选择一条数据！");
                 return;
             }
-            selectedData=datas.data[0];
+            selectedData = datas.data[0];
             layer.open({
                 title: "修改",
                 type: 2,
@@ -182,7 +182,10 @@
             }
             var id = datas.data[0].Id;
             $.post("/Group/DeleteBrand", { "id": id }, function (ret) {
-                alertS(ret.msg);
+                if (ret.Code < 0)
+                    alertF(ret.Msg);
+                else
+                    alertS(ret.Msg);
             })
         }
     </script>

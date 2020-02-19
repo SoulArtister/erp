@@ -38,8 +38,8 @@ namespace ERP.Infrastructure.Common
         /// <returns>原文</returns>
         public static string DecryptToString(this string cryptString)
         {
-            //if (cryptString.Length != 24)
-            //    return cryptString;
+            if (cryptString.Length == 0)
+                return cryptString;
 
             byte[] cryptKey = System.Convert.FromBase64String(CryptKey);
             byte[] cryptIV = System.Convert.FromBase64String(CryptIV);

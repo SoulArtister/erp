@@ -146,27 +146,27 @@ namespace ERP.Domain.Entity
             /// <summary>
             /// * 
             /// </summary>
-            public readonly static Field All = new Field("*", "EnvironmentSettings");
+            public readonly static Field All = new Field("*", "Sys_EnvironmentSettings");
             /// <summary>
             /// 
             /// </summary>
-            public readonly static Field ParamCode = new Field("ParamCode", "EnvironmentSettings", "");
+            public readonly static Field ParamCode = new Field("ParamCode", "Sys_EnvironmentSettings", "");
             /// <summary>
             /// 
             /// </summary>
-            public readonly static Field ParamName = new Field("ParamName", "EnvironmentSettings", "");
+            public readonly static Field ParamName = new Field("ParamName", "Sys_EnvironmentSettings", "");
             /// <summary>
             /// 
             /// </summary>
-            public readonly static Field ParamDataType = new Field("ParamDataType", "EnvironmentSettings", "");
+            public readonly static Field ParamDataType = new Field("ParamDataType", "Sys_EnvironmentSettings", "");
             /// <summary>
             /// 
             /// </summary>
-            public readonly static Field ParamValue = new Field("ParamValue", "EnvironmentSettings", "");
+            public readonly static Field ParamValue = new Field("ParamValue", "Sys_EnvironmentSettings", "");
             /// <summary>
             /// 
             /// </summary>
-            public readonly static Field Description = new Field("Description", "EnvironmentSettings", "");
+            public readonly static Field Description = new Field("Description", "Sys_EnvironmentSettings", "");
         }
         #endregion
     }

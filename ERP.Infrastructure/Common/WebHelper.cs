@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,18 @@ namespace ERP.Infrastructure.Common
 {
     public class WebHelper
     {
+        #region 基础操作
+
+        public static string SessionId
+        {
+            get { return HttpContext.Current.Session.SessionID; }
+        }
+
+        public static string UserHostAddress
+        {
+            get { return HttpContext.Current.Request.UserHostAddress; }
+        }
+
         /// <summary>
         /// 把session中的字符串转成对象
         /// </summary>
@@ -31,6 +44,91 @@ namespace ERP.Infrastructure.Common
             string jsonStr = GetSession(key);
             return jsonStr.JsonToObject<IList<T>>();
         }
+
+        #endregion
+
+        #region 登录互斥操作
+
+        /// <summary>
+        /// 在web应用全局中记录用户sessionid和账户
+        /// </summary>
+        /// <param name="userAccount">用户账户</param>
+        public static void UserToApplication(string userAccount)
+        {
+            HttpContext httpContext = System.Web.HttpContext.Current;
+            string sessionId = httpContext.Session.SessionID;
+            //哈希表记录sessionid和账户
+            Hashtable onlineUsers = (Hashtable)httpContext.Application["OnlineUsers"];
+            if (onlineUsers != null)
+            {
+                IDictionaryEnumerator eId = onlineUsers.GetEnumerator();
+                string hashKey = string.Empty;
+                while (eId.MoveNext())
+                {
+                    if (eId.Value == null || !eId.Value.ToString().Equals(userAccount))
+                    {
+                        continue;
+                    }
+                    //如果账户已存在，则把这个账户对应得sessionid（key就是sessionid）得状态置为offline
+                    hashKey = eId.Key.ToString();
+                    onlineUsers[hashKey] = "offline";
+                    break;
+                }
+            }
+            else
+            {
+                onlineUsers = new Hashtable();
+            }
+            onlineUsers[sessionId] = userAccount;
+            httpContext.Application.Lock();
+            httpContext.Application["OnlineUsers"] = onlineUsers;
+            httpContext.Application.UnLock();
+        }
+
+        /// <summary>
+        /// 检查是否登录互斥
+        /// </summary>
+        /// <returns></returns>
+        public static bool CheckLoginMutex()
+        {
+            try
+            {
+                HttpContext httpContext = System.Web.HttpContext.Current;
+                Hashtable onlineUsers = (Hashtable)(httpContext.Application["OnlineUsers"]);
+                if (onlineUsers == null)
+                    return false;
+                IDictionaryEnumerator eId = onlineUsers.GetEnumerator();
+                if (onlineUsers.Count <= 0)
+                    return false;
+
+                string hashKey = string.Empty;
+                string sessionId = httpContext.Session.SessionID;
+                while (eId.MoveNext())
+                {
+                    //判断是否登录时保存的session是否与当前页面的sesion相同
+                    if (!onlineUsers.Contains(sessionId))
+                        continue;
+                    if (eId.Key == null || !eId.Key.ToString().Equals(sessionId))
+                        continue;
+                    //判断当前session保存的值是否为被注销值
+                    if (eId.Value != null && "offline".Equals(eId.Value.ToString()))
+                    {
+                        //验证被注销则清空session
+                        onlineUsers.Remove(sessionId);
+                        httpContext.Application.Lock();
+                        httpContext.Application["OnlineUsers"] = onlineUsers;
+                        httpContext.Application.UnLock();
+                        return true;
+                    }
+                }
+                return false;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        #endregion
 
         #region Session操作
 
@@ -165,7 +263,8 @@ namespace ERP.Infrastructure.Common
         /// <param name="CookiesName">Cookie对象名称</param>
         public static void ClearCookie()
         {
-            HttpContext.Current.Response.Cookies.Clear();
+            if (HttpContext.Current != null)
+                HttpContext.Current.Response.Cookies.Clear();
         }
         #endregion
 

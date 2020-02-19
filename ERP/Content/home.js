@@ -89,3 +89,15 @@ function refreshIframe() {
     var iframe = $('#ifmdiv' + iframeid + ' iframe');
     $(iframe).attr('src', $(iframe).attr('src'));
 }
+
+//检查登录互斥
+function checkLoginMutex() {
+    $.post("/Home/CheckLoginMutex", {}, function (ret) {
+        if (ret.Code == 0) {
+            if (ret.Data == "1") {
+                alert(ret.Msg);
+                window.location.href = "../../Login/Index";
+            }
+        }
+    })
+}

@@ -51,20 +51,7 @@ namespace ERP.Infrastructure.Common
         {
             string mret = msg;
             if (msg.IndexOf("服务器") > -1)
-                mret = "服务器链接失败";
-            if (msg.IndexOf("输入内容不正确") > -1)
-                mret = "账套、用户名或密码错误";
-            if (msg.IndexOf("令牌") > -1)
-                mret = "没有有效的登录信息";
-            if (msg.IndexOf("没有找到对应科目") > -1)
-                mret = "账套内缺少必要的科目，请检查账套内科目";
-            if (msg.IndexOf("错误的请求") > -1)
-                mret = "账套、用户名或密码错误";
-            if (msg.IndexOf(" ") > -1)
-            {
-                if (msg.ToLower().Replace(" ", "").Contains("keycannotbenull"))
-                    mret = "登录状态过期，请重新登录";
-            }
+                mret = "服务器错误";
             return mret;
         }
 

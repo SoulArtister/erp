@@ -26,7 +26,7 @@ namespace ERP.Infrastructure.Common
         /// <param name="param"></param>
         public static void ErrorFormat(string control, string method, string message, string param)
         {
-            log.ErrorFormat("[Controller:{0}][Method:{1}][Message:{2}][Param:{3}]", control, method,message, param);
+            log.ErrorFormat("[Controller:{0}][Action:{1}][Message:{2}][Param:{3}]", control, method, message, param);
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace ERP.Infrastructure.Common
         /// <param name="param"></param>
         public static void ErrorFormat(string control, string method, string message, object result, string param)
         {
-            log.ErrorFormat("[Controller:{0}][Method:{1}][Message:{2}][Param:{3}]", control, method, result, param);
+            log.ErrorFormat("[Controller:{0}][Action:{1}][Message:{2}][Param:{3}]", control, method, result, param);
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace ERP.Infrastructure.Common
         /// <param name="result"></param>
         public static void InfoFormat(string control, string method, string result)
         {
-            log.InfoFormat("[Controller:{0}][Method:{1}][Result:{2}]", control, method, result);
+            log.InfoFormat("[Controller:{0}][Action:{1}][Result:{2}]", control, method, result);
         }
     }
 }

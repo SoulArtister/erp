@@ -275,55 +275,55 @@ namespace ERP.Domain.Entity
             /// <summary>
             /// * 
             /// </summary>
-            public readonly static Field All = new Field("*", "Menu");
+            public readonly static Field All = new Field("*", "Sys_Menu");
             /// <summary>
             /// 
             /// </summary>
-            public readonly static Field Id = new Field("Id", "Menu", "");
+            public readonly static Field Id = new Field("Id", "Sys_Menu", "");
             /// <summary>
             /// 
             /// </summary>
-            public readonly static Field MemuNo = new Field("MemuNo", "Menu", "");
+            public readonly static Field MemuNo = new Field("MemuNo", "Sys_Menu", "");
             /// <summary>
             /// 
             /// </summary>
-            public readonly static Field MenuName = new Field("MenuName", "Menu", "");
+            public readonly static Field MenuName = new Field("MenuName", "Sys_Menu", "");
             /// <summary>
             /// 
             /// </summary>
-            public readonly static Field UrlRoute = new Field("UrlRoute", "Menu", "");
+            public readonly static Field UrlRoute = new Field("UrlRoute", "Sys_Menu", "");
             /// <summary>
             /// 
             /// </summary>
-            public readonly static Field IniParam = new Field("IniParam", "Menu", "");
+            public readonly static Field IniParam = new Field("IniParam", "Sys_Menu", "");
             /// <summary>
             /// 
             /// </summary>
-            public readonly static Field Sno = new Field("Sno", "Menu", "");
+            public readonly static Field Sno = new Field("Sno", "Sys_Menu", "");
             /// <summary>
             /// 
             /// </summary>
-            public readonly static Field Icon = new Field("Icon", "Menu", "");
+            public readonly static Field Icon = new Field("Icon", "Sys_Menu", "");
             /// <summary>
             /// 
             /// </summary>
-            public readonly static Field Hiding = new Field("Hiding", "Menu", "");
+            public readonly static Field Hiding = new Field("Hiding", "Sys_Menu", "");
             /// <summary>
             /// 
             /// </summary>
-            public readonly static Field Stopping = new Field("Stopping", "Menu", "");
+            public readonly static Field Stopping = new Field("Stopping", "Sys_Menu", "");
             /// <summary>
             /// 
             /// </summary>
-            public readonly static Field TopMenuId = new Field("TopMenuId", "Menu", "");
+            public readonly static Field TopMenuId = new Field("TopMenuId", "Sys_Menu", "");
             /// <summary>
             /// 
             /// </summary>
-            public readonly static Field ParentId = new Field("ParentId", "Menu", "");
+            public readonly static Field ParentId = new Field("ParentId", "Sys_Menu", "");
             /// <summary>
             /// 
             /// </summary>
-            public readonly static Field HaveBtn = new Field("HaveBtn", "Menu", "");
+            public readonly static Field HaveBtn = new Field("HaveBtn", "Sys_Menu", "");
         }
         #endregion
     }

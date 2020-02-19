@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="BrandR.cs" />
     <Compile Include="EnvironmentSettingsR.cs" />
+    <Compile Include="LoginLogR.cs" />
     <Compile Include="Map_MenuChainR.cs" />
     <Compile Include="MenuR.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

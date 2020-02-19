@@ -12,7 +12,7 @@ namespace ERP.Controllers
     /// <summary>
     /// 登录
     /// </summary>
-    public class LoginController : Controller
+    public class LoginController : BaseController
     {
 
         /// <summary>
@@ -33,21 +33,49 @@ namespace ERP.Controllers
         /// <param name="password"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult Login(string chainNo, string account, string password)
+        public JsonResult Login(string chainNo, string account, string password)
         {
             var user = new LoginApp().Login(account, password);
-            if (user == null)
-                return Json(new { msg = "用户名或密码错误" });
+            if (user == null || string.IsNullOrWhiteSpace(user.Account))
+            {
+                return Json(base.ErrResult("用户名或密码错误"));
+            }
             RepMenuApp rmApp = new RepMenuApp();
             var menuList = rmApp.MenuList(account);
             if (menuList == null || menuList.Count == 0)
-                return Json(new { msg = "无权限" });
+                return Json(base.ErrResult("无权限"));
 
+            string timeStamp = DataTrans.GetTimeStamp();
+            WriteSession(menuList, user, timeStamp);
+            SysLog(user.Account, timeStamp);
+            WebHelper.UserToApplication(user.Account);
+
+            return SuccessReturn();
+        }
+
+
+
+        /// <summary>
+        /// 记录session
+        /// </summary>
+        /// <param name="menuList"></param>
+        /// <param name="user"></param>
+        private void WriteSession(IList<Menu> menuList, User user, string timeStamp)
+        {
             WebHelper.WriteSession("menus", menuList.ObjectToJson());
-            WebHelper.WriteSession("username", user.UserName );
+            WebHelper.WriteSession("username", user.UserName);
             WebHelper.WriteSession("useraccount", user.Account);
+            WebHelper.WriteSession("timestamp", timeStamp);
+        }
 
-            return Redirect("/Home/Index");
+        /// <summary>
+        /// 记录登录日志到数据库
+        /// </summary>
+        /// <param name="account"></param>
+        /// <param name="timeStamp"></param>
+        private void SysLog(string account, string timeStamp)
+        {
+            new HomeApp().SaveSysLoginLog(account, timeStamp);
         }
 
         /// <summary>

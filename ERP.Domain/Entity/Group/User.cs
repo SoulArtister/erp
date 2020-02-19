@@ -326,67 +326,67 @@ namespace ERP.Domain.Entity
             /// <summary>
             /// * 
             /// </summary>
-            public readonly static Field All = new Field("*", "Users");
+            public readonly static Field All = new Field("*", "G_Users");
             /// <summary>
             /// 
             /// </summary>
-            public readonly static Field Id = new Field("Id", "Users", "");
+            public readonly static Field Id = new Field("Id", "G_Users", "");
             /// <summary>
             /// 
             /// </summary>
-            public readonly static Field Account = new Field("Account", "Users", "");
+            public readonly static Field Account = new Field("Account", "G_Users", "");
             /// <summary>
             /// 
             /// </summary>
-            public readonly static Field Password = new Field("Password", "Users", "");
+            public readonly static Field Password = new Field("Password", "G_Users", "");
             /// <summary>
             /// 
             /// </summary>
-            public readonly static Field EmployeeNo = new Field("EmployeeNo", "Users", "");
+            public readonly static Field EmployeeNo = new Field("EmployeeNo", "G_Users", "");
             /// <summary>
             /// 
             /// </summary>
-            public readonly static Field UserName = new Field("UserName", "Users", "");
+            public readonly static Field UserName = new Field("UserName", "G_Users", "");
             /// <summary>
             /// 
             /// </summary>
-            public readonly static Field QQ = new Field("QQ", "Users", "");
+            public readonly static Field QQ = new Field("QQ", "G_Users", "");
             /// <summary>
             /// 
             /// </summary>
-            public readonly static Field Email = new Field("Email", "Users", "");
+            public readonly static Field Email = new Field("Email", "G_Users", "");
             /// <summary>
             /// 
             /// </summary>
-            public readonly static Field Birthday = new Field("Birthday", "Users", "");
+            public readonly static Field Birthday = new Field("Birthday", "G_Users", "");
             /// <summary>
             /// 
             /// </summary>
-            public readonly static Field CreateTime = new Field("CreateTime", "Users", "");
+            public readonly static Field CreateTime = new Field("CreateTime", "G_Users", "");
             /// <summary>
             /// 
             /// </summary>
-            public readonly static Field ChangePassTime = new Field("ChangePassTime", "Users", "");
+            public readonly static Field ChangePassTime = new Field("ChangePassTime", "G_Users", "");
             /// <summary>
             /// 
             /// </summary>
-            public readonly static Field ActiveIp = new Field("ActiveIp", "Users", "");
+            public readonly static Field ActiveIp = new Field("ActiveIp", "G_Users", "");
             /// <summary>
             /// 
             /// </summary>
-            public readonly static Field LastLoginTime = new Field("LastLoginTime", "Users", "");
+            public readonly static Field LastLoginTime = new Field("LastLoginTime", "G_Users", "");
             /// <summary>
             /// 
             /// </summary>
-            public readonly static Field OrgId = new Field("OrgId", "Users", "");
+            public readonly static Field OrgId = new Field("OrgId", "G_Users", "");
             /// <summary>
             /// 
             /// </summary>
-            public readonly static Field DepId = new Field("DepId", "Users", "");
+            public readonly static Field DepId = new Field("DepId", "G_Users", "");
             /// <summary>
             /// 
             /// </summary>
-            public readonly static Field LastTimeStamp = new Field("LastTimeStamp", "Users", "");
+            public readonly static Field LastTimeStamp = new Field("LastTimeStamp", "G_Users", "");
         }
         #endregion
     }

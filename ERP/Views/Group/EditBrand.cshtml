@@ -78,8 +78,15 @@
             var data = form.val('brandinfo');
             data.Using = data.Using == "on" ? true : false;
             $.post("/Group/SaveBrand", data, function (ret) {
-                alertS(ret.msg);
-            })
+                if (ret.Code < 0)
+                    alertF(ret.Msg);
+                else {
+                    parent.loaddata();
+                    alertS(ret.Msg, function () {
+                        cancel();
+                    });
+                }
+            });
         }
 
         function cancel() {

@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Runtime.Serialization;
 using Dos.ORM;
 using ERP.Infrastructure.Data;
@@ -7,21 +6,21 @@ using ERP.Infrastructure.Data;
 namespace ERP.Domain.Entity
 {
     /// <summary>
-    /// 实体类Brand。(属性说明自动提取数据库字段的描述信息)
+    /// 实体类Sys_LoginLog。(属性说明自动提取数据库字段的描述信息)
     /// </summary>
-    [Table("G_Brand")]
+    [Table("Sys_LoginLog")]
     [Serializable]
     [DataContract]
-    public partial class Brand : IEntityValue
+    public partial class LoginLog : IEntityValue
     {
         #region Model
         private int _Id;
-        private string _BrandNo;
-        private string _BrandName;
-        private string _Spell;
-        private string _Comment;
-        private bool? _Using;
-        public string UsingValue { get { return _Using == true ? "是" : "否"; } }
+        private string _AccountNo;
+        private DateTime? _OccureTime;
+        private string _SessionId;
+        private string _UserHostAddress;
+        private string _UserHostName;
+        private long? _IntTimeStamp;
 
         /// <summary>
         /// 
@@ -40,71 +39,85 @@ namespace ERP.Domain.Entity
         /// <summary>
         /// 
         /// </summary>
-        [Field("BrandNo")]
+        [Field("AccountNo")]
         [DataMember]
-        public string BrandNo
+        public string AccountNo
         {
-            get { return _BrandNo; }
+            get { return _AccountNo; }
             set
             {
-                this.OnPropertyValueChange("BrandNo");
-                this._BrandNo = value;
+                this.OnPropertyValueChange("AccountNo");
+                this._AccountNo = value;
             }
         }
         /// <summary>
         /// 
         /// </summary>
-        [Field("BrandName")]
+        [Field("OccureTime")]
         [DataMember]
-        public string BrandName
+        public DateTime? OccureTime
         {
-            get { return _BrandName; }
+            get { return _OccureTime; }
             set
             {
-                this.OnPropertyValueChange("BrandName");
-                this._BrandName = value;
+                this.OnPropertyValueChange("OccureTime");
+                this._OccureTime = value;
             }
         }
         /// <summary>
         /// 
         /// </summary>
-        [Field("Spell")]
+        [Field("SessionId")]
         [DataMember]
-        public string Spell
+        public string SessionId
         {
-            get { return _Spell; }
+            get { return _SessionId; }
             set
             {
-                this.OnPropertyValueChange("Spell");
-                this._Spell = value;
+                this.OnPropertyValueChange("SessionId");
+                this._SessionId = value;
             }
         }
         /// <summary>
         /// 
         /// </summary>
-        [Field("Comment")]
+        [Field("UserHostAddress")]
         [DataMember]
-        public string Comment
+        public string UserHostAddress
         {
-            get { return _Comment; }
+            get { return _UserHostAddress; }
             set
             {
-                this.OnPropertyValueChange("Comment");
-                this._Comment = value;
+                this.OnPropertyValueChange("UserHostAddress");
+                this._UserHostAddress = value;
             }
         }
         /// <summary>
         /// 
         /// </summary>
-        [Field("Using")]
+        [Field("UserHostName")]
         [DataMember]
-        public bool? Using
+        public string UserHostName
         {
-            get { return _Using; }
+            get { return _UserHostName; }
             set
             {
-                this.OnPropertyValueChange("Using");
-                this._Using = value;
+                this.OnPropertyValueChange("UserHostName");
+                this._UserHostName = value;
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        [Field("IntTimeStamp")]
+        [DataMember]
+        public long? IntTimeStamp
+        {
+            get { return _IntTimeStamp; }
+            set
+            {
+                this.OnPropertyValueChange("IntTimeStamp");
+                this._IntTimeStamp = value;
             }
         }
         #endregion
@@ -133,11 +146,12 @@ namespace ERP.Domain.Entity
         {
             return new Field[] {
 				_.Id,
-				_.BrandNo,
-				_.BrandName,
-				_.Spell,
-				_.Comment,
-				_.Using,
+				_.AccountNo,
+				_.OccureTime,
+				_.SessionId,
+				_.UserHostAddress,
+				_.UserHostName,
+				_.IntTimeStamp,
 			};
         }
         /// <summary>
@@ -147,11 +161,12 @@ namespace ERP.Domain.Entity
         {
             return new object[] {
 				this._Id,
-				this._BrandNo,
-				this._BrandName,
-				this._Spell,
-				this._Comment,
-				this._Using,
+				this._AccountNo,
+				this._OccureTime,
+				this._SessionId,
+				this._UserHostAddress,
+				this._UserHostName,
+				this._IntTimeStamp,
 			};
         }
         /// <summary>
@@ -173,31 +188,35 @@ namespace ERP.Domain.Entity
             /// <summary>
             /// * 
             /// </summary>
-            public readonly static Field All = new Field("*", "Brand");
+            public readonly static Field All = new Field("*", "Sys_LoginLog");
             /// <summary>
             /// 
             /// </summary>
-            public readonly static Field Id = new Field("Id", "Brand", "");
+            public readonly static Field Id = new Field("Id", "Sys_LoginLog", "");
             /// <summary>
             /// 
             /// </summary>
-            public readonly static Field BrandNo = new Field("BrandNo", "Brand", "");
+            public readonly static Field AccountNo = new Field("AccountNo", "Sys_LoginLog", "");
             /// <summary>
             /// 
             /// </summary>
-            public readonly static Field BrandName = new Field("BrandName", "Brand", "");
+            public readonly static Field OccureTime = new Field("OccureTime", "Sys_LoginLog", "");
             /// <summary>
             /// 
             /// </summary>
-            public readonly static Field Spell = new Field("Spell", "Brand", "");
+            public readonly static Field SessionId = new Field("SessionId", "Sys_LoginLog", "");
             /// <summary>
             /// 
             /// </summary>
-            public readonly static Field Comment = new Field("Comment", "Brand", "");
+            public readonly static Field UserHostAddress = new Field("UserHostAddress", "Sys_LoginLog", "");
             /// <summary>
             /// 
             /// </summary>
-            public readonly static Field Using = new Field("Using", "Brand", "");
+            public readonly static Field UserHostName = new Field("UserHostName", "Sys_LoginLog", "");
+            /// <summary>
+            /// 
+            /// </summary>
+            public readonly static Field IntTimeStamp = new Field("IntTimeStamp", "Sys_LoginLog", "");
         }
         #endregion
     }

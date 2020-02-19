@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ERP.Infrastructure.Common;
 
 namespace ERP.Controllers.group
 {
@@ -12,7 +13,7 @@ namespace ERP.Controllers.group
     /// 集团
     /// 包括集团名称，品牌
     /// </summary>
-    public class GroupController : Controller
+    public class GroupController : BaseController
     {
         /// <summary>
         /// 集团页面
@@ -20,7 +21,7 @@ namespace ERP.Controllers.group
         /// <returns></returns>
         public ActionResult Index()
         {
-            ViewBag.GroupName = new GroupApp().GetEnvironmentInfo("GroupName");
+            ViewBag.GroupName = new HomeApp().GetEnvironmentInfo("GroupName");
             return View();
         }
 
@@ -32,11 +33,12 @@ namespace ERP.Controllers.group
         [HttpPost]
         public JsonResult SaveGroupName(string groupName)
         {
-            var results = "保存成功";
-            var code = 0;
-            if (!new GroupApp().Save("GroupName", groupName, ref results))
-                code = -1;
-            return Json(new { code = code, data = results });
+            var results = "";
+            if (!new HomeApp().SaveEnvironment("GroupName", groupName, ref results))
+            {
+                return ErrReturn(results);
+            }
+            return SuccessReturn();
         }
 
         #region 品牌
@@ -49,7 +51,8 @@ namespace ERP.Controllers.group
         public JsonResult Brands()
         {
             var data = new GroupApp().BrandList();
-            return Json(new { data = data });
+            base.result.Data = data;
+            return SuccessReturn();
         }
 
         public ActionResult EditBrand()
@@ -58,19 +61,19 @@ namespace ERP.Controllers.group
         }
 
         /// <summary>
-        /// 保存品牌
+        /// 保存品牌，新增和修改
         /// </summary>
         /// <param name="brand"></param>
         /// <returns></returns>
         [HttpPost]
         public JsonResult SaveBrand(Brand brand)
         {
-            var reslut = "";
-            if (brand.Id == 0)
-                reslut = "新增";
-            else
-                reslut = "修改";
-            return Json(new { msg = reslut });
+            var err = "";
+            if (!new GroupApp().SaveBrand(brand, ref err))
+            {
+                return ErrReturn(err);
+            }
+            return SuccessReturn();
         }
 
         /// <summary>
@@ -81,8 +84,10 @@ namespace ERP.Controllers.group
         [HttpPost]
         public JsonResult DeleteBrand(int id)
         {
-            return Json(new { msg = "d" });
-
+            var err = "";
+            if (!new GroupApp().DeleteBrand(id, ref err))
+                return ErrReturn(err);
+            return SuccessReturn();
         }
 
         #endregion

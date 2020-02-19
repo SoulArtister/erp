@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 
-namespace ERPApi
+namespace ERP
 {
     public static class WebApiConfig
     {
@@ -16,8 +16,8 @@ namespace ERPApi
             //);
 
             config.Routes.MapHttpRoute(
-              name: "ERPs",
-              routeTemplate: "Api/ERPV1/{controller}/{action}/{id}",
+              name: "ERP",
+              routeTemplate: "ERPApi/V1/{controller}/{action}/{id}",
               defaults: new { id = RouteParameter.Optional }
           );
 

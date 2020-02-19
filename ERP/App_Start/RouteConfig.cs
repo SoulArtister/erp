@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace ERPApi
+namespace ERP
 {
     public class RouteConfig
     {
@@ -16,7 +16,6 @@ namespace ERPApi
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                //defaults: new { controller = "Chain", action = "Login", id = UrlParameter.Optional }
                 defaults: new { controller = "Login", action = "Index", id = UrlParameter.Optional }
             );
         }

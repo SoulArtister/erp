@@ -1,0 +1,419 @@
+
+----------------------header--------------------------
+2020-02-19 16:05:30,507 [7] ERROR -> - [Controller:Login][Method:Index][Message:System.ArgumentException: 在路由集合中未能找到名为“Login”的路由。
+参数名: name
+   在 System.Web.Routing.RouteCollection.GetVirtualPath(RequestContext requestContext, String name, RouteValueDictionary values)
+   在 System.Web.Mvc.RouteCollectionExtensions.GetVirtualPathForArea(RouteCollection routes, RequestContext requestContext, String name, RouteValueDictionary values, Boolean& usingAreas)
+   在 System.Web.Mvc.UrlHelper.GenerateUrl(String routeName, String actionName, String controllerName, RouteValueDictionary routeValues, RouteCollection routeCollection, RequestContext requestContext, Boolean includeImplicitMvcValues)
+   在 System.Web.Mvc.RedirectToRouteResult.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)][Param:["ASP.NET_SessionId","ALL_HTTP","ALL_RAW","APPL_MD_PATH","APPL_PHYSICAL_PATH","AUTH_TYPE","AUTH_USER","AUTH_PASSWORD","LOGON_USER","REMOTE_USER","CERT_COOKIE","CERT_FLAGS","CERT_ISSUER","CERT_KEYSIZE","CERT_SECRETKEYSIZE","CERT_SERIALNUMBER","CERT_SERVER_ISSUER","CERT_SERVER_SUBJECT","CERT_SUBJECT","CONTENT_LENGTH","CONTENT_TYPE","GATEWAY_INTERFACE","HTTPS","HTTPS_KEYSIZE","HTTPS_SECRETKEYSIZE","HTTPS_SERVER_ISSUER","HTTPS_SERVER_SUBJECT","INSTANCE_ID","INSTANCE_META_PATH","LOCAL_ADDR","PATH_INFO","PATH_TRANSLATED","QUERY_STRING","REMOTE_ADDR","REMOTE_HOST","REMOTE_PORT","REQUEST_METHOD","SCRIPT_NAME","SERVER_NAME","SERVER_PORT","SERVER_PORT_SECURE","SERVER_PROTOCOL","SERVER_SOFTWARE","URL","HTTP_CONNECTION","HTTP_ACCEPT","HTTP_ACCEPT_ENCODING","HTTP_ACCEPT_LANGUAGE","HTTP_COOKIE","HTTP_HOST","HTTP_USER_AGENT","HTTP_UPGRADE_INSECURE_REQUESTS","HTTP_SEC_FETCH_USER","HTTP_SEC_FETCH_SITE","HTTP_SEC_FETCH_MODE"]]
+
+----------------------header--------------------------
+2020-02-19 16:06:01,009 [6] ERROR -> - [Controller:Login][Method:Index][Message:System.ArgumentException: 在路由集合中未能找到名为“/Login/Index”的路由。
+参数名: name
+   在 System.Web.Routing.RouteCollection.GetVirtualPath(RequestContext requestContext, String name, RouteValueDictionary values)
+   在 System.Web.Mvc.RouteCollectionExtensions.GetVirtualPathForArea(RouteCollection routes, RequestContext requestContext, String name, RouteValueDictionary values, Boolean& usingAreas)
+   在 System.Web.Mvc.UrlHelper.GenerateUrl(String routeName, String actionName, String controllerName, RouteValueDictionary routeValues, RouteCollection routeCollection, RequestContext requestContext, Boolean includeImplicitMvcValues)
+   在 System.Web.Mvc.RedirectToRouteResult.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)][Param:["ASP.NET_SessionId","ALL_HTTP","ALL_RAW","APPL_MD_PATH","APPL_PHYSICAL_PATH","AUTH_TYPE","AUTH_USER","AUTH_PASSWORD","LOGON_USER","REMOTE_USER","CERT_COOKIE","CERT_FLAGS","CERT_ISSUER","CERT_KEYSIZE","CERT_SECRETKEYSIZE","CERT_SERIALNUMBER","CERT_SERVER_ISSUER","CERT_SERVER_SUBJECT","CERT_SUBJECT","CONTENT_LENGTH","CONTENT_TYPE","GATEWAY_INTERFACE","HTTPS","HTTPS_KEYSIZE","HTTPS_SECRETKEYSIZE","HTTPS_SERVER_ISSUER","HTTPS_SERVER_SUBJECT","INSTANCE_ID","INSTANCE_META_PATH","LOCAL_ADDR","PATH_INFO","PATH_TRANSLATED","QUERY_STRING","REMOTE_ADDR","REMOTE_HOST","REMOTE_PORT","REQUEST_METHOD","SCRIPT_NAME","SERVER_NAME","SERVER_PORT","SERVER_PORT_SECURE","SERVER_PROTOCOL","SERVER_SOFTWARE","URL","HTTP_CONNECTION","HTTP_ACCEPT","HTTP_ACCEPT_ENCODING","HTTP_ACCEPT_LANGUAGE","HTTP_COOKIE","HTTP_HOST","HTTP_USER_AGENT","HTTP_UPGRADE_INSECURE_REQUESTS","HTTP_SEC_FETCH_USER","HTTP_SEC_FETCH_SITE","HTTP_SEC_FETCH_MODE"]]
+
+----------------------header--------------------------
+2020-02-19 16:07:48,272 [8] ERROR -> - [Controller:Login][Method:Login][Message:System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 ERP.Application.RepMenuApp.MenuList(String account) 位置 e:\工作\erp\ERP.Application\RepMenuApp.cs:行号 19
+   在 ERP.Controllers.LoginController.Login(String chainNo, String account, String password) 位置 e:\工作\erp\ERP\Controllers\LoginController.cs:行号 44
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   在 System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)][Param:["chainNo","userName","password","ASP.NET_SessionId","ALL_HTTP","ALL_RAW","APPL_MD_PATH","APPL_PHYSICAL_PATH","AUTH_TYPE","AUTH_USER","AUTH_PASSWORD","LOGON_USER","REMOTE_USER","CERT_COOKIE","CERT_FLAGS","CERT_ISSUER","CERT_KEYSIZE","CERT_SECRETKEYSIZE","CERT_SERIALNUMBER","CERT_SERVER_ISSUER","CERT_SERVER_SUBJECT","CERT_SUBJECT","CONTENT_LENGTH","CONTENT_TYPE","GATEWAY_INTERFACE","HTTPS","HTTPS_KEYSIZE","HTTPS_SECRETKEYSIZE","HTTPS_SERVER_ISSUER","HTTPS_SERVER_SUBJECT","INSTANCE_ID","INSTANCE_META_PATH","LOCAL_ADDR","PATH_INFO","PATH_TRANSLATED","QUERY_STRING","REMOTE_ADDR","REMOTE_HOST","REMOTE_PORT","REQUEST_METHOD","SCRIPT_NAME","SERVER_NAME","SERVER_PORT","SERVER_PORT_SECURE","SERVER_PROTOCOL","SERVER_SOFTWARE","URL","HTTP_CONNECTION","HTTP_CONTENT_LENGTH","HTTP_CONTENT_TYPE","HTTP_ACCEPT","HTTP_ACCEPT_ENCODING","HTTP_ACCEPT_LANGUAGE","HTTP_COOKIE","HTTP_HOST","HTTP_REFERER","HTTP_USER_AGENT","HTTP_X_REQUESTED_WITH","HTTP_ORIGIN","HTTP_SEC_FETCH_SITE","HTTP_SEC_FETCH_MODE"]]
+
+----------------------header--------------------------
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+2020-02-19 16:22:06,393 [7] INFO  -> - [Controller:Login][Method:Login][Result:操作成功]
+
+----------------------header--------------------------
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+2020-02-19 16:23:28,446 [6] INFO  -> - [Controller:Login][Method:Login][Result:操作成功]
+2020-02-19 16:30:50,520 [7] INFO  -> - [Controller:Login][Method:Login][Result:操作成功]
+2020-02-19 16:31:09,580 [10] INFO  -> - [Controller:Group][Method:Brands][Result:操作成功]
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+2020-02-19 16:47:25,948 [33] INFO  -> - [Controller:Login][Method:Login][Result:操作成功]
+2020-02-19 16:48:52,378 [33] INFO  -> - [Controller:Login][Method:Login][Result:操作成功]
+2020-02-19 16:50:46,425 [34] INFO  -> - [Controller:Login][Method:Login][Result:操作成功]
+2020-02-19 16:52:03,019 [34] INFO  -> - [Controller:Login][Method:Login][Result:操作成功]
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+2020-02-19 17:37:53,648 [26] INFO  -> - [Controller:Login][Method:Login][Result:操作成功]
+2020-02-19 17:38:24,699 [24] INFO  -> - [Controller:Login][Method:Login][Result:操作成功]
+2020-02-19 17:38:27,878 [24] INFO  -> - [Controller:Group][Method:Index][Result:当前账号于2020-02-19 17:38:27在别处登录（IP为::1），您被迫下线！若非本人操作，请注意账户安全！]
+2020-02-19 17:38:50,310 [30] INFO  -> - [Controller:Group][Method:Brands][Result:操作成功]
+2020-02-19 17:38:54,463 [52] INFO  -> - [Controller:Group][Method:Brands][Result:操作成功]
+2020-02-19 17:38:58,987 [52] INFO  -> - [Controller:Group][Method:Brands][Result:操作成功]
+2020-02-19 17:39:08,935 [19] INFO  -> - [Controller:Login][Method:Login][Result:操作成功]
+2020-02-19 17:39:10,141 [53] INFO  -> - [Controller:Group][Method:Brands][Result:操作成功]
+2020-02-19 17:39:13,082 [30] INFO  -> - [Controller:Group][Method:Organize][Result:当前账号于2020-02-19 17:39:13在别处登录（IP为192.168.2.117），您被迫下线！若非本人操作，请注意账户安全！]
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+2020-02-19 17:41:13,084 [24] INFO  -> - [Controller:Login][Method:Login][Result:操作成功]
+2020-02-19 17:41:17,694 [30] INFO  -> - [Controller:Login][Method:Login][Result:操作成功]
+2020-02-19 17:41:25,046 [9] INFO  -> - [Controller:Group][Method:Index][Result:当前账号于2020-02-19 17:41:25在别处登录（IP为::1），您被迫下线！若非本人操作，请注意账户安全！]
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+2020-02-19 17:43:19,255 [24] INFO  -> - [Controller:Login][Method:Login][Result:操作成功]
+2020-02-19 17:43:29,782 [24] INFO  -> - [Controller:Login][Method:Login][Result:操作成功]
+2020-02-19 17:45:20,117 [24] INFO  -> - [Controller:Group][Method:Index][Result:当前账号于2020-02-19 17:45:20在别处登录（IP为::1），您被迫下线！若非本人操作，请注意账户安全！]
+2020-02-19 17:46:32,273 [9] INFO  -> - [Controller:Group][Method:Brands][Result:操作成功]
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+2020-02-19 17:54:16,894 [9] INFO  -> - [Controller:Login][Action:Login][Result:操作成功]
+2020-02-19 17:54:55,423 [9] INFO  -> - [Controller:Login][Action:Login][Result:操作成功]
+2020-02-19 17:55:11,500 [74] INFO  -> - [Controller:Group][Action:Index][Result:当前账号于2020-02-19 17:55:08在别处登录），您被迫下线！若非本人操作，请注意账户安全！]
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+2020-02-19 17:57:31,695 [68] INFO  -> - [Controller:Login][Action:Login][Result:操作成功]
+2020-02-19 17:57:45,229 [68] INFO  -> - [Controller:Login][Action:Login][Result:操作成功]
+2020-02-19 17:58:09,327 [68] INFO  -> - [Controller:Group][Action:Index][Result:当前账号于2020-02-19 17:58:08在别处登录），您被迫下线！若非本人操作，请注意账户安全！]
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+2020-02-19 18:09:13,860 [29] INFO  -> - [Controller:Login][Action:Login][Result:操作成功]
+2020-02-19 18:09:19,068 [83] INFO  -> - [Controller:Login][Action:Login][Result:操作成功]
+2020-02-19 18:09:24,956 [83] INFO  -> - [Controller:Group][Action:Index][Result:当前账号于2020-02-19 18:09:24在别处登录），您被迫下线！若非本人操作，请注意账户安全！]
+2020-02-19 18:09:28,724 [83] INFO  -> - [Controller:Group][Action:Brands][Result:操作成功]
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+2020-02-19 18:25:33,686 [63] INFO  -> - [Controller:Login][Action:Login][Result:操作成功]
+2020-02-19 18:25:52,803 [71] INFO  -> - [Controller:Login][Action:Login][Result:操作成功]
+2020-02-19 18:26:59,312 [57] INFO  -> - [Controller:Login][Action:Login][Result:操作成功]
+2020-02-19 18:27:03,955 [57] INFO  -> - [Controller:Login][Action:Login][Result:操作成功]
+2020-02-19 18:29:00,151 [53] INFO  -> - [Controller:Login][Action:Login][Result:操作成功]
+2020-02-19 18:29:07,112 [60] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:29:12,223 [60] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:29:18,574 [80] INFO  -> - [Controller:Login][Action:Login][Result:操作成功]
+2020-02-19 18:29:20,046 [62] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:当前账号于2020-02-19 18:29:20在别处登录），您被迫下线！若非本人操作，请注意账户安全！]
+2020-02-19 18:29:20,047 [62] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:当前账号于2020-02-19 18:29:20在别处登录），您被迫下线！若非本人操作，请注意账户安全！]
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+2020-02-19 18:30:49,084 [28] INFO  -> - [Controller:Login][Action:Login][Result:操作成功]
+2020-02-19 18:31:08,749 [28] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:31:09,254 [66] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:31:09,753 [28] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:31:09,823 [67] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:31:14,816 [67] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+2020-02-19 18:31:26,892 [66] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:31:29,821 [81] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:31:34,822 [66] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:31:39,817 [69] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:31:44,815 [66] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:31:58,775 [66] INFO  -> - [Controller:Login][Action:Login][Result:操作成功]
+2020-02-19 18:32:04,374 [64] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:32:04,802 [28] INFO  -> - [Controller:Login][Action:Login][Result:操作成功]
+2020-02-19 18:32:09,382 [59] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:32:14,376 [84] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:32:19,372 [67] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:32:24,372 [64] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:32:29,372 [59] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:32:34,372 [69] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:32:39,377 [66] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:当前账号于2020-02-19 18:32:39在别处登录），您被迫下线！若非本人操作，请注意账户安全！]
+2020-02-19 18:32:39,381 [66] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:当前账号于2020-02-19 18:32:39在别处登录），您被迫下线！若非本人操作，请注意账户安全！]
+2020-02-19 18:32:45,366 [58] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+2020-02-19 18:35:57,729 [52] INFO  -> - [Controller:Login][Action:Login][Result:操作成功]
+2020-02-19 18:36:03,835 [52] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:36:08,810 [18] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:36:13,808 [16] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:36:18,808 [52] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:36:23,809 [77] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:36:28,809 [19] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:36:30,599 [52] INFO  -> - [Controller:Login][Action:Login][Result:操作成功]
+2020-02-19 18:36:33,809 [28] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:当前账号于2020-02-19 18:36:33在别处登录，您被迫下线！若非本人操作，请注意账户安全！]
+2020-02-19 18:36:33,810 [28] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:当前账号于2020-02-19 18:36:33在别处登录，您被迫下线！若非本人操作，请注意账户安全！]
+2020-02-19 18:36:39,534 [19] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:36:46,319 [16] INFO  -> - [Controller:Group][Action:Brands][Result:操作成功]
+2020-02-19 18:37:11,135 [57] INFO  -> - [Controller:Login][Action:Login][Result:操作成功]
+2020-02-19 18:37:16,197 [30] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:37:21,195 [57] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:37:26,201 [57] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:37:31,201 [28] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:37:36,196 [60] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:37:41,197 [28] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:37:46,199 [61] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:37:51,200 [58] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:37:56,198 [28] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:38:01,202 [52] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:38:06,201 [28] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+2020-02-19 18:39:37,288 [58] INFO  -> - [Controller:Login][Action:Login][Result:操作成功]
+2020-02-19 18:39:50,881 [58] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:39:53,878 [68] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:39:53,991 [56] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:39:58,878 [18] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:40:20,866 [58] INFO  -> - [Controller:Login][Action:Login][Result:操作成功]
+2020-02-19 18:41:17,865 [18] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:当前账号于2020-02-19 18:41:17在别处登录，您被迫下线！若非本人操作，请注意账户安全！]
+2020-02-19 18:41:19,703 [18] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:当前账号于2020-02-19 18:41:17在别处登录，您被迫下线！若非本人操作，请注意账户安全！]
+2020-02-19 18:41:22,803 [80] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:41:22,809 [56] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:41:22,813 [18] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:41:22,818 [55] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:41:22,822 [72] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:41:22,826 [68] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:41:22,831 [74] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:41:22,834 [56] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:41:22,838 [18] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:41:22,841 [55] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:41:23,305 [62] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:41:23,805 [68] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:41:24,308 [27] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:41:24,808 [56] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:41:25,308 [72] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:41:26,483 [58] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:43:36,188 [58] INFO  -> - [Controller:Login][Action:Login][Result:操作成功]
+2020-02-19 18:44:04,675 [56] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:44:32,713 [83] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:44:34,842 [79] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:44:36,328 [58] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:44:37,481 [71] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:44:38,624 [58] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:44:39,768 [13] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:44:47,025 [61] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:44:47,030 [56] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:44:47,102 [73] INFO  -> - [Controller:Group][Action:Brands][Result:操作成功]
+2020-02-19 18:44:47,528 [52] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:44:48,044 [61] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:44:48,561 [75] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:44:49,056 [58] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:44:49,558 [55] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:44:51,265 [58] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:44:56,263 [58] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:45:01,267 [58] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:45:06,267 [58] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:45:19,696 [58] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:45:42,473 [66] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:45:42,975 [82] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:45:43,476 [55] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:45:43,976 [43] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:45:44,477 [11] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:45:44,978 [47] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:45:46,261 [29] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:45:51,262 [45] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:45:56,261 [58] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:46:01,266 [11] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:46:06,267 [11] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:46:11,266 [55] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:46:16,261 [47] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:46:21,269 [17] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:46:26,270 [29] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:46:31,262 [17] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:46:36,266 [23] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:46:41,261 [76] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:46:46,261 [29] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:46:51,262 [11] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:46:56,262 [58] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:47:01,262 [38] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:47:06,261 [18] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:47:11,261 [58] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:47:16,260 [58] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:47:21,267 [70] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:47:26,263 [43] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:47:31,261 [42] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:47:36,268 [58] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:47:41,262 [18] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:47:46,261 [18] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+2020-02-19 18:47:52,416 [42] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+2020-02-19 18:49:57,923 [58] INFO  -> - [Controller:Login][Action:Login][Result:操作成功]
+2020-02-19 18:50:08,996 [35] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:50:18,973 [56] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:50:28,974 [30] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:50:38,973 [78] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+2020-02-19 18:50:59,434 [17] INFO  -> - [Controller:Login][Action:Login][Result:操作成功]
+2020-02-19 18:51:06,247 [79] INFO  -> - [Controller:Login][Action:Login][Result:操作成功]
+2020-02-19 18:51:10,062 [31] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:当前账号于2020-02-19 18:51:10在别处登录，您被迫下线！若非本人操作，请注意账户安全！]
+2020-02-19 18:51:10,063 [31] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:当前账号于2020-02-19 18:51:10在别处登录，您被迫下线！若非本人操作，请注意账户安全！]
+2020-02-19 18:51:16,484 [79] INFO  -> - [Controller:Login][Action:Login][Result:操作成功]
+2020-02-19 18:51:26,545 [31] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:51:36,537 [56] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:51:41,026 [58] INFO  -> - [Controller:Login][Action:Login][Result:操作成功]
+2020-02-19 18:51:46,537 [78] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:当前账号于2020-02-19 18:51:46在别处登录，您被迫下线！若非本人操作，请注意账户安全！]
+2020-02-19 18:51:46,538 [78] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:当前账号于2020-02-19 18:51:46在别处登录，您被迫下线！若非本人操作，请注意账户安全！]
+2020-02-19 18:51:53,134 [52] INFO  -> - [Controller:Login][Action:Login][Result:操作成功]
+2020-02-19 18:52:03,205 [79] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:52:13,198 [13] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:52:23,200 [35] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:52:33,193 [17] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:52:43,199 [67] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:52:53,197 [35] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:53:03,203 [79] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:53:13,198 [67] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:53:23,198 [58] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:53:33,199 [56] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:53:43,198 [56] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:53:53,197 [18] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:54:03,196 [78] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:54:13,200 [31] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:54:23,198 [52] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:54:33,199 [17] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:54:43,199 [52] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:54:53,193 [31] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:55:03,198 [71] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:55:13,200 [18] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:55:23,194 [52] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:55:43,749 [31] INFO  -> - [Controller:Login][Action:Login][Result:操作成功]
+2020-02-19 18:55:46,469 [35] INFO  -> - [Controller:Login][Action:Login][Result:操作成功]
+2020-02-19 18:55:56,529 [67] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:56:06,534 [75] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:56:20,028 [30] INFO  -> - [Controller:Login][Action:Login][Result:操作成功]
+2020-02-19 18:56:30,091 [35] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:56:40,087 [17] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:56:50,089 [31] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+2020-02-19 18:57:50,324 [58] INFO  -> - [Controller:Login][Action:Login][Result:操作成功]
+2020-02-19 18:58:48,536 [47] INFO  -> - [Controller:Login][Action:Login][Result:操作成功]
+2020-02-19 18:59:00,247 [25] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 18:59:28,123 [58] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 19:00:03,679 [18] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 19:00:14,624 [7] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 19:00:15,126 [7] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 19:00:15,627 [25] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 19:00:16,128 [7] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 19:00:16,628 [10] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 19:00:20,231 [58] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 19:00:30,231 [58] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 19:00:40,224 [58] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 19:00:50,234 [58] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 19:01:00,966 [58] INFO  -> - [Controller:Login][Action:Login][Result:操作成功]
+2020-02-19 19:01:00,968 [25] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:当前账号于2020-02-19 19:01:00在别处登录，您被迫下线！若非本人操作，请注意账户安全！]
+2020-02-19 19:01:00,969 [25] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:当前账号于2020-02-19 19:01:00在别处登录，您被迫下线！若非本人操作，请注意账户安全！]
+2020-02-19 19:01:46,796 [47] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 19:01:52,197 [18] INFO  -> - [Controller:Login][Action:Login][Result:操作成功]
+2020-02-19 19:01:54,766 [58] INFO  -> - [Controller:Login][Action:Login][Result:操作成功]
+2020-02-19 19:02:02,462 [8] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:当前账号于2020-02-19 19:02:02在别处登录，您被迫下线！若非本人操作，请注意账户安全！]
+2020-02-19 19:02:02,466 [8] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:当前账号于2020-02-19 19:02:02在别处登录，您被迫下线！若非本人操作，请注意账户安全！]
+2020-02-19 19:02:04,858 [58] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 19:02:14,855 [25] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 19:02:25,275 [25] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 19:02:35,282 [25] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 19:02:45,276 [25] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 19:02:55,275 [25] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 19:03:05,285 [25] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 19:03:15,281 [25] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 19:03:25,282 [25] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 19:03:35,282 [25] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 19:03:45,277 [25] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 19:03:55,275 [25] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 19:04:05,276 [25] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 19:04:15,282 [25] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 19:04:25,282 [25] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 19:04:35,282 [25] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 19:04:45,281 [25] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 19:04:55,282 [25] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 19:05:05,275 [8] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 19:05:15,275 [25] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 19:05:25,276 [25] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+2020-02-19 19:05:37,532 [10] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 19:05:45,274 [33] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 19:05:55,280 [81] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 19:06:05,274 [33] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 19:06:20,987 [34] INFO  -> - [Controller:Login][Action:Login][Result:操作成功]
+2020-02-19 19:06:27,385 [10] INFO  -> - [Controller:Login][Action:Login][Result:操作成功]
+2020-02-19 19:06:29,247 [33] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:当前账号于2020-02-19 19:06:29在别处登录，您被迫下线！若非本人操作，请注意账户安全！]
+2020-02-19 19:06:29,249 [33] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:当前账号于2020-02-19 19:06:29在别处登录，您被迫下线！若非本人操作，请注意账户安全！]
+2020-02-19 19:06:35,315 [81] INFO  -> - [Controller:Login][Action:Login][Result:操作成功]
+2020-02-19 19:06:36,925 [36] INFO  -> - [Controller:Group][Action:Brands][Result:操作成功]
+2020-02-19 19:06:37,373 [53] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:操作成功]
+2020-02-19 19:06:39,839 [34] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:当前账号于2020-02-19 19:06:39在别处登录，您被迫下线！若非本人操作，请注意账户安全！]
+2020-02-19 19:06:39,841 [34] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:当前账号于2020-02-19 19:06:39在别处登录，您被迫下线！若非本人操作，请注意账户安全！]
+2020-02-19 19:06:50,220 [8] INFO  -> - [Controller:Login][Action:Login][Result:操作成功]
+2020-02-19 19:06:53,051 [28] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:当前账号于2020-02-19 19:06:53在别处登录，您被迫下线！若非本人操作，请注意账户安全！]
+2020-02-19 19:06:53,056 [28] INFO  -> - [Controller:Home][Action:CheckLoginMutex][Result:当前账号于2020-02-19 19:06:53在别处登录，您被迫下线！若非本人操作，请注意账户安全！]

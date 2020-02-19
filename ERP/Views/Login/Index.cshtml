@@ -37,7 +37,7 @@
                     </div>
                 </div>
                 <br />
-                <input type="submit" class="layui-btn layui-btn-fluid" value="登录" id="btnlogin" />
+                <input type="button" class="layui-btn layui-btn-fluid" onclick="enterIn()" value="登录" id="btnlogin" />
             </form>
         </div>
         <footer class="layui-footer">
@@ -48,13 +48,10 @@
             <p>- &copy; 好食好客·@DateTime.Now.Year -</p>
         </footer>
     </div>
-    <script src="~/Content/themes/jquery-1.9.1.js"></script>
-    <script src="~/Content/layui-v2.4.5/layui/layui.js"></script>
+    <script src="~/Content/themes/jquery2.1.1.min.js"></script>
+    <script src="~/Content/layui-v2.5.6/layui/layui.js"></script>
     <script>
         $(function () {
-            $("#username").val('@ViewBag.UserName');
-            $("#chainno").val('@ViewBag.ChainNo');
-
             $("body").keydown(function () {
                 var theEvent = window.event || arguments.callee.caller.arguments[0];
                 if (theEvent.keyCode != 13)
@@ -67,39 +64,26 @@
                     form = layui.form,
                     element = layui.element;
             });
-
-            //登入
-            //$("#btnlogin").click(function () {
-            //    enterIn();
-            //});
-
-            function enterIn() {
-                var chainid = $("#chainno").val();
-                if (!chainid || chainid.length == 0 || chainid.length != 6) {
-                    alertAbsorb("请填写正确商户编号", "chainno");
-                    return;
-                }
-                var user = $("#username").val();
-                var password = $("#pass").val();
-                $.ajax({
-                    url: "/Login/Login",
-                    data: { chainNo: chainid, userName: user, password: password },
-                    type: "post",
-                    dataType: "json",
-                    success: function (data) {
-                        if (data.msg == "") {
-                            layer.msg("正在登录。。");
-                            window.location.href = "/Chain/Index?datas=" + data.datas;
-                        }
-                        else {
-                            alertF(data.msg);
-                        }
-                    }
-                });
-            }
         });
 
-
+        function enterIn() {
+            //var chainid = $("#chainno").val();
+            //if (!chainid || chainid.length == 0 || chainid.length != 6) {
+            //    alertAbsorb("请填写正确商户编号", "chainno");
+            //    return;
+            //}
+            var user = $("#username").val();
+            var password = $("#pass").val();
+            $.post("/Login/Login", { chainNo: "", account: user, password: password }, function (data) {
+                if (data.Code == 0) {
+                    layer.msg("正在登录。。");
+                    window.location.href = "/Home/Index";
+                }
+                else {
+                    alertF(data.Msg);
+                }
+            })
+        }
     </script>
 </body>
 </html>

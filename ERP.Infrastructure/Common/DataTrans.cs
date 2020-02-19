@@ -15,6 +15,16 @@ namespace ERP.Infrastructure.Common
     public static class DataTrans
     {
         /// <summary>
+        /// 获取时间戳
+        /// </summary>
+        /// <returns></returns>
+        public static string GetTimeStamp()
+        {
+            TimeSpan ts = DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            return Convert.ToInt64(ts.TotalSeconds).ToString();
+        }  
+
+        /// <summary>
         /// 把连加字符串中重复的数据改为乘法
         /// 如：1+1+2转为1*2+2
         /// </summary>

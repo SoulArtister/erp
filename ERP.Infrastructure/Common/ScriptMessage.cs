@@ -12,6 +12,15 @@ namespace ERP.Infrastructure.Common
     public static class ScriptMessage
     {
         /// <summary>
+        /// 警告提示
+        /// </summary>
+        /// <param name="message"></param>
+        public static void AlertW(string message)
+        {
+            ResponseScript("alertW('" + message + "');");
+        }
+
+        /// <summary>
         /// 提示
         /// </summary>
         /// <param name="message"></param>
