@@ -11,11 +11,20 @@ using System.Data.SqlClient;
 
 namespace ERP.Infrastructure.Data
 {
+    /// <summary>
+    /// 数据仓储实现
+    /// </summary>
+    /// <typeparam name="TEntity"></typeparam>
     public class RepositoryBaseT<TEntity> : IRepositoryBaseT<TEntity> where TEntity : IEntityValue, new()
     {
         public DbSession context = DosContext.dosContext;
 
+        string cacheKey = string.Empty;
 
+        public void SetCacheKey(string key)
+        {
+            cacheKey = key;
+        }
 
         public bool IsExist(Expression<Func<TEntity, bool>> predicate)
         {
@@ -26,7 +35,6 @@ namespace ERP.Infrastructure.Data
         {
             return context.Insert<TEntity>(entity);
         }
-
 
         public int Insert(List<TEntity> entitys)
         {
@@ -43,7 +51,6 @@ namespace ERP.Infrastructure.Data
             return context.Update(entity);
         }
 
-
         public int Delete(TEntity entity)
         {
             return context.Delete(entity);
@@ -54,64 +61,49 @@ namespace ERP.Infrastructure.Data
             return context.Delete<TEntity>(predicate);
         }
 
-        public TEntity FindEntity(Expression<Func<TEntity, bool>> predicate)
+        public TEntity FindEntity(Expression<Func<TEntity, bool>> predicate, bool isCache = false)
         {
             return context.From<TEntity>().Where(predicate).ToFirstDefault();
         }
 
-
-        public IList<TEntity> IQueryable()
+        public IList<TEntity> IQueryable(bool isCache = false)
         {
             return context.From<TEntity>().ToList();
         }
 
-
-        public IList<TEntity> IQueryable(Expression<Func<TEntity, bool>> predicate)
+        public IList<TEntity> IQueryable(Expression<Func<TEntity, bool>> predicate, bool isCache = false)
         {
             return context.From<TEntity>().Where(predicate).ToList();
         }
 
-
-        public IList<TEntity> FindList(Expression<Func<TEntity, bool>> predicate)
+        public IList<TEntity> FindList(Expression<Func<TEntity, bool>> predicate, bool isCache = false)
         {
-            return context.From<TEntity>().Where(predicate).ToList();
+            IList<TEntity> list = null;
+            if (isCache && !string.IsNullOrWhiteSpace(cacheKey))
+            {
+                using (var cache = new RepositoryCache<IList<TEntity>>(cacheKey))
+                {
+                    list = cache.Get();
+                    if (list == null || list.Count == 0)
+                    {
+                        list = context.From<TEntity>().Where(predicate).ToList();
+                        cache.Set(list);
+                    }
+                }
+            }
+            else
+            {
+                list = context.From<TEntity>().Where(predicate).ToList();
+            }
+            return list;
         }
-
-        //public int FindCount(string sql, DbParameter[] dbParameter = null)
-        //{
-        //    SqlSection ss = new SqlSection(context, sql);
-        //    if (dbParameter != null)
-        //        ss.AddParameter(dbParameter);
-        //    return ss.ToScalar<int>();
-        //}
-
-        //public string FindStringValue(string sql, DbParameter[] dbParameter = null)
-        //{
-        //    SqlSection ss = new SqlSection(context, sql);
-        //    if (dbParameter != null)
-        //        ss.AddParameter(dbParameter);
-        //    return ss.ToScalar<string>();
-        //}
-
-        //public List<TEntity> FindList(string strSql)
-        //{
-        //    return context.FromSql(strSql).ToList<TEntity>();
-        //}
-
-
-        //public List<TEntity> FindList(string strSql, DbParameter[] dbParameter)
-        //{
-        //    SqlSection ss = new SqlSection(context, strSql);
-        //    ss.AddParameter(dbParameter);
-        //    return ss.ToList<TEntity>();
-        //}
 
         /*
          ***********************上面是dos.orm实现******************************
          ************************下面是dapper实现******************************
          */
 
-        public string QueryValue(string sql, object param)
+        public string QueryValue(string sql, object param, bool isCache = false)
         {
             using (var con = OpenConnection())
             {
@@ -119,7 +111,7 @@ namespace ERP.Infrastructure.Data
             }
         }
 
-        public TEntity QueryEntity(string sql, object param)
+        public TEntity QueryEntity(string sql, object param, bool isCache = false)
         {
             using (var con = OpenConnection())
             {
@@ -127,7 +119,7 @@ namespace ERP.Infrastructure.Data
             }
         }
 
-        public List<TEntity> QueryList(string sql, object param)
+        public List<TEntity> QueryList(string sql, object param, bool isCache = false)
         {
             using (var con = OpenConnection())
             {
@@ -141,7 +133,7 @@ namespace ERP.Infrastructure.Data
         /// <param name="proName"></param>
         /// <param name="param"></param>
         /// <returns></returns>
-        public List<TEntity> QueryListByPro(string proName, object param)
+        public List<TEntity> QueryListByPro(string proName, object param, bool isCache = false)
         {
             using (var con = OpenConnection())
             {

@@ -10,5 +10,9 @@ namespace ERP.Repository
 {
     public class BrandR : RepositoryBaseT<Brand>, IBrandR
     {
+        public BrandR()
+        {
+            base.SetCacheKey("brand");
+        }
     }
 }

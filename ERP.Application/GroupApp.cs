@@ -21,7 +21,7 @@ namespace ERP.Application
         {
             try
             {
-                return new BrandR().FindList(i => 1 == 1);
+                return new BrandR().FindList(i => 1 == 1, true);
             }
             catch
             {
@@ -45,11 +45,11 @@ namespace ERP.Application
                 {
                     return brandR.Insert(brand) > 0;
                 }
+                //修改
                 else
                 {
                     return brandR.Update(brand) > 0;
                 }
-                return true;
             }
             catch (Exception ex)
             {

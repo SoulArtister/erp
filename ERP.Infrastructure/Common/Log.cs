@@ -8,7 +8,6 @@ namespace ERP.Infrastructure.Common
 {
     public static class Log
     {
-        //static ILog log = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         static ILog log = log4net.LogManager.GetLogger("->");
 
         public static void ErrorFormat(string message)

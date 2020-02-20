@@ -9,6 +9,7 @@ namespace ERP.Infrastructure.Data
 {
     public interface IRepositoryBaseT<TEntity> where TEntity : class,new()
     {
+        void SetCacheKey(string key);
         bool IsExist(Expression<Func<TEntity, bool>> predicate);
         int Insert(TEntity entity);
         int Insert(List<TEntity> entitys);
@@ -16,29 +17,21 @@ namespace ERP.Infrastructure.Data
         int Update(TEntity entity);
         int Delete(TEntity entity);
         int Delete(Expression<Func<TEntity, bool>> predicate);
-        TEntity FindEntity(Expression<Func<TEntity, bool>> predicate);
-        IList<TEntity> IQueryable();
-        IList<TEntity> IQueryable(Expression<Func<TEntity, bool>> predicate);
+        TEntity FindEntity(Expression<Func<TEntity, bool>> predicate, bool isCache = false);
+        IList<TEntity> IQueryable(bool isCache = false);
+        IList<TEntity> IQueryable(Expression<Func<TEntity, bool>> predicate, bool isCache = false);
 
-        IList<TEntity> FindList(Expression<Func<TEntity, bool>> predicate);
-
-        //List<TEntity> FindList(string strSql);
-
-        //int FindCount(string sql, DbParameter[] dbParameter = null);
-
-        //string FindStringValue(string sql, DbParameter[] dbParameter = null);
-
-        //List<TEntity> FindList(string strSql, DbParameter[] dbParameter);
+        IList<TEntity> FindList(Expression<Func<TEntity, bool>> predicate, bool isCache = false);
 
         /*
          ***********************上面是dos.orm实现******************************
          ************************下面是dapper实现******************************
          */
-        string QueryValue(string sql, object param);
+        string QueryValue(string sql, object param, bool isCache = false);
 
-        TEntity QueryEntity(string sql, object param);
+        TEntity QueryEntity(string sql, object param, bool isCache = false);
 
-        List<TEntity> QueryList(string sql, object param);
+        List<TEntity> QueryList(string sql, object param, bool isCache = false);
 
         /// <summary>
         /// 存储过程查询
@@ -46,7 +39,7 @@ namespace ERP.Infrastructure.Data
         /// <param name="proName"></param>
         /// <param name="param"></param>
         /// <returns></returns>
-        List<TEntity> QueryListByPro(string proName, object param);
+        List<TEntity> QueryListByPro(string proName, object param, bool isCache = false);
 
         int Excute(string sql, object param);
 

@@ -22,7 +22,7 @@ namespace ERP.Application
             }
             catch
             {
-                return null;
+                return new User();
             }
         }
     }
