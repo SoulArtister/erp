@@ -14,19 +14,20 @@ namespace ERP.Infrastructure.Common
         /// <summary>
         /// 返回码
         /// </summary>
-        public int Code { get; set; }
+        public int code { get; set; }
+        public int count { get; set; }
 
         /// <summary>
         /// 返回消息
         /// </summary>
-        public string Msg { get; set; }
+        public string msg { get; set; }
 
         public string Err { get; set; }
 
         /// <summary>
         /// 数据
         /// </summary>
-        public T Data { get; set; }
+        public T data { get; set; }
 
     }
 }

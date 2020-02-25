@@ -31,32 +31,32 @@ namespace ERP.Infrastructure.Data
             return context.From<TEntity>().Where(predicate).Count() > 0;
         }
 
-        public int Insert(TEntity entity)
+        public int Insert(TEntity entity, bool isCache = false)
         {
             return context.Insert<TEntity>(entity);
         }
 
-        public int Insert(List<TEntity> entitys)
+        public int Insert(List<TEntity> entitys, bool isCache = false)
         {
             return context.Insert(entitys);
         }
 
-        public int Insert(IEnumerable<TEntity> entitys)
+        public int Insert(IEnumerable<TEntity> entitys, bool isCache = false)
         {
             return context.Insert(entitys);
         }
 
-        public int Update(TEntity entity)
+        public int Update(TEntity entity, bool isCache = false)
         {
             return context.Update(entity);
         }
 
-        public int Delete(TEntity entity)
+        public int Delete(TEntity entity, bool isCache = false)
         {
             return context.Delete(entity);
         }
 
-        public int Delete(Expression<Func<TEntity, bool>> predicate)
+        public int Delete(Expression<Func<TEntity, bool>> predicate, bool isCache = false)
         {
             return context.Delete<TEntity>(predicate);
         }

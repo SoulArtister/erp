@@ -1,0 +1,126 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/layui-v2.5.6/layui/css/layui.css" rel="stylesheet" />
+    <title>EditMenuView</title>
+</head>
+<body>
+    <div class="layui-fluid" style="">
+        <form class="layui-form " style="margin-top:15px;" lay-filter="menuinfo">
+            <div class="layui-form-item">
+                <label class="layui-form-label">菜单名称</label>
+                <div class="layui-input-block">
+                    <input type="text" name="MenuName" required autocomplete="off" class="layui-input" value="@ViewBag.Data.MenuName" />
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">路径</label>
+                <div class="layui-input-block">
+                    <input type="text" name="UrlRoute" required autocomplete="off" class="layui-input" value="@ViewBag.Data.UrlRoute" />
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">顺序号</label>
+                <div class="layui-input-block">
+                    <input type="text" name="Sno" required autocomplete="off" class="layui-input"  value="@ViewBag.Data.Sno" />
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">图标</label>
+                <div class="layui-input-block">
+                    <input type="text" name="Icon" required autocomplete="off" class="layui-input" value="@ViewBag.Data.Icon" />
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-col-xs4">
+                    <label class="layui-form-label">隐藏</label>
+                    <div class="layui-input-block">
+                        <input type="checkbox" name="Hiding" lay-skin="switch" lay-text="是|否">
+                    </div>
+                </div>
+                <div class="layui-col-xs4">
+                    <label class="layui-form-label">停用</label>
+                    <div class="layui-input-block">
+                        <input type="checkbox" name="Stopping" lay-skin="switch" lay-text="是|否">
+                    </div>
+                </div>
+                <div class="layui-col-xs4">
+                    <label class="layui-form-label">是否有按钮</label>
+                    <div class="layui-input-block">
+                        <input type="checkbox" name="HaveBtn" lay-skin="switch" lay-text="是|否">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item" style="display:none">
+                <label class="layui-form-label">Id</label>
+                <div class="layui-input-block">
+                    <input type="text" name="Id" required autocomplete="off" class="layui-input" />
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <input class="layui-btn layui-btn-form" onclick="save()" value="保存" />
+                    <input class="layui-btn layui-btn-primary layui-btn-form" onclick="cancel();" value="取消" />
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script src="~/Content/themes/jquery2.1.1.min.js"></script>
+    <script src="~/Content/layui-v2.5.6/layui/layui.js"></script>
+    <script src="~/Content/commonjs.js"></script>
+    <script>
+        var form;
+        $(function () {
+            layui.use('form', function () {
+                form = layui.form;
+                var ishide = '@ViewBag.Data.Hiding';
+                var isstop = '@ViewBag.Data.Stopping';
+                var havebtn = '@ViewBag.Data.HaveBtn';
+                var id = '@ViewBag.Data.Id';
+                form.val('menuinfo', {
+                    "Hiding": ishide == true,
+                    "Stopping": isstop == true,
+                    "HaveBtn": havebtn == true,
+                    "Id": id
+                })
+            })
+        })
+
+        //保存
+        function save() {
+            var data = form.val('menuinfo');
+            data.Hiding = data.Hiding == "on" ? true : false;
+            data.Stopping = data.Stopping == "on" ? true : false;
+            data.HaveBtn = data.HaveBtn == "on" ? true : false;
+            var pid = '@ViewBag.Data.ParentId';
+            data.ParentId = pid.trim();
+            data.TopMenuId = getUrlParam("tid");
+            if (!data.ParentId) {
+                alertW('上级菜单定位失败');
+                return;
+            }
+            $.post("/Menu/Save", data, function (ret) {
+                if (ret.code < 0)
+                    alertF(ret.msg);
+                else {
+                    parent.menutree();
+                    alertS(ret.msg, function () {
+                        cancel();
+                    });
+                }
+            });
+        }
+
+        function cancel() {
+            parent.layer.closeAll();
+        }
+    </script>
+</body>
+</html>

@@ -19,9 +19,11 @@ namespace ERP.Controllers.group
         /// 集团页面
         /// </summary>
         /// <returns></returns>
-        public ActionResult Index()
+        public ActionResult Index(int id)
         {
             ViewBag.GroupName = new HomeApp().GetEnvironmentInfo("GroupName");
+            string account = WebHelper.GetSession("useraccount");
+            ViewBag.Buttons = new RepMenuApp().GetButtons(account, id);
             return View();
         }
 
@@ -51,7 +53,8 @@ namespace ERP.Controllers.group
         public JsonResult Brands()
         {
             var data = new GroupApp().BrandList();
-            base.result.Data = data;
+            base.result.count = data.Count;
+            base.result.data = data;
             return SuccessReturn();
         }
 

@@ -38,7 +38,7 @@ namespace ERP.Controllers
             //环境变量中关闭了登录互斥
             if (isNeedCheck == "0")
             { 
-                result.Data="0";
+                result.data="0";
                 return SuccessReturn();
             }
             if (WebHelper.CheckLoginMutex())
@@ -46,8 +46,8 @@ namespace ERP.Controllers
                 string msg = string.Format("当前账号于{0}在别处登录，您被迫下线！若非本人操作，请注意账户安全！",
                                                 DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                 Log.InfoFormat(controlName, actionName, msg);
-                result.Msg = msg;
-                result.Data = "1";
+                result.msg = msg;
+                result.data = "1";
             }
             return SuccessReturn();
         }

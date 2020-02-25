@@ -36,32 +36,20 @@
                 <div class="layui-card">
                     <div class="layui-card-header">品牌</div>
                     <div class="layui-card-body">
-                        <form class="layui-form">
-                            <div class="layui-form-item">
-                                <div class="layui-inline">
-                                    <div class="layui-input-block" style="margin-left:1px;">
-                                        <button type="button" class="layui-btn layui-btn-normal" onclick="add()">新增</button>
-                                        <button type="button" class="layui-btn" onclick="edit()">修改</button>
-                                        <button type="button" class="layui-btn layui-btn-danger" onclick="del()">删除</button>
-                                    </div>
-                                </div>
+                        <table class="layui-hide" id="brands" lay-filter="brands"></table>
+                        <script type="text/html" id="toolbarBrand">
+                            <div class="layui-btn-container">
+                                @{
+                                    foreach (var btn in ViewBag.Buttons)
+                                    {
+                                        <button type="button" class="@btn.ClassName" onclick="@btn.FuncName">@btn.ButtonName</button>
+                                    }
+                                }
+                                @*<button type="button" class="layui-btn layui-btn-normal" onclick="add()">新增</button>
+                                    <button type="button" class="layui-btn" onclick="edit()">修改</button>
+                                    <button type="button" class="layui-btn layui-btn-danger" onclick="del()">删除</button>*@
                             </div>
-                        </form>
-                        <table lay-filter="brands" lay-data="{id: 'datas'}">
-                            <thead>
-                                <tr>
-                                    <th lay-data="{ type: 'radio', width: 70 }"></th>
-                                    <th lay-data="{field:'Index', width:80}">序号</th>
-                                    <th lay-data="{field:'BrandNo', width:100}">编号</th>
-                                    <th lay-data="{field:'BrandName', width:130}">名称</th>
-                                    <th lay-data="{field:'Spell', width:130}">拼音</th>
-                                    <th lay-data="{field:'Comment', width:190}">备注</th>
-                                    <th lay-data="{field:'UsingValue', width:90}">启用</th>
-                                    <th lay-data="{ field: 'Id', title: '', width: 0, hide: true }"></th>
-                                </tr>
-                            </thead>
-                            <tbody id="datas"></tbody>
-                        </table>
+                        </script>
                     </div>
                 </div>
             </div>
@@ -79,64 +67,57 @@
             loaddata();
         })
 
-        //加载数据
         function loaddata() {
-            var length = 0;
-            //设为同步
-            $.ajaxSettings.async = false;
-            $.post('/Group/Brands', {}, function (ret) {
-                if (ret) {
-                    length = ret.Data.length;
-                    var tabled = document.getElementById("datas");
-                    $(table).empty();
-                    var htmls = "";
-                    for (var i = 0; i < ret.Data.length; i++) {
-                        var obj = ret.Data[i];
-                        var tds = "<td></td><td>" + (i + 1) + "</td>";
-                        tds += "<td>" + obj.BrandNo + "</td>";
-                        tds += "<td>" + obj.BrandName + "</td>";
-                        tds += "<td>" + obj.Spell + "</td>";
-                        tds += "<td >" + obj.Comment + "</td>";
-                        tds += "<td >" + obj.UsingValue + "</td>";
-                        tds += "<td >" + obj.Id + "</td>";
-                        htmls += "<tr>" + tds + "</tr>";
-                    }
-                    $(tabled).html(htmls);
-                }
-            })
-            $.ajaxSettings.async = true;
-
             layui.use('table', function () {
-                table = layui.table;
-                //转换静态表格
-                table.init("brands", {
-                    height: 'full-235' //设置高度
-                  , limit: length //注意：请务必确保 limit 参数（默认：10）是与服务端限定的数据条数一致
-                  , even: true //开启隔行背景
-                  , size: 'sm' //小尺寸的表格
+                if (!table)
+                    table = layui.table;
+
+                table.render({
+                    elem: '#brands'
+                    , url: '/Group/Brands/'
+                    , method: 'post'
+                    , toolbar: '#toolbarBrand'//说明了工具栏放在那个table上
+                    , defaultToolbar: ['print', 'exports']//指定默认工具得顺序
+                    , cols: [[
+                          { type: 'radio' }
+                        , { field: 'BrandNo', width: 100, sort: true, title: '编号' }
+                        , { field: 'BrandName', width: 130, title: '名称' }
+                        , { field: 'Spell', width: 130, title: '拼音' }
+                        , { field: 'Comment', width: 190, title: '备注' }
+                        , { field: 'UsingValue', width: 90, title: '启用' }
+                        , { field: 'Id', title: '', width: 0, hide: true }
+                    ]]
+                    , page: true
+                    , even: true //开启隔行背景
                 });
+
+                //头工具栏事件
+                table.on('toolbar(brands)', function (obj) {
+                });
+
+                //绑定时，用的lay-filter属性
                 table.on('rowDouble(brands)', function (obj) {
                     selectedData = obj.data;
                     layer.open({
                         title: "修改",
                         type: 2,
-                        area: ['500px', '550px'],
+                        area: ['500px', '450px'],
                         fixed: false, //不固定
                         maxmin: false,
                         content: '/Group/EditBrand'
                     });
-                })
+                });
             });
         }
 
         //保存集团名称
         function savegname() {
             $.post('/Group/SaveGroupName', { "groupName": $("#txtgname").val() }, function (ret) {
-                if (ret.Code < 0) {
-                    alertF(ret.Msg);
+                if (ret.code < 0) {
+                    alertF(ret.msg);
                 }
                 else {
-                    alertS(ret.Msg);
+                    alertS(ret.msg);
                 }
             })
         }
@@ -148,7 +129,7 @@
             layer.open({
                 title: "新增",
                 type: 2,
-                area: ['500px', '550px'],
+                area: ['500px', '450px'],
                 fixed: false, //不固定
                 maxmin: false,
                 content: '/Group/EditBrand'
@@ -157,7 +138,7 @@
 
         //修改
         function edit() {
-            var datas = table.checkStatus('datas');
+            var datas = table.checkStatus('brands');//用的id属性
             if (!datas || datas.data.length > 1 || datas.data.length == 0) {
                 alertW("请选择一条数据！");
                 return;
@@ -166,26 +147,28 @@
             layer.open({
                 title: "修改",
                 type: 2,
-                area: ['500px', '550px'],
+                area: ['500px', '450px'],
                 fixed: false, //不固定
                 maxmin: false,
                 content: '/Group/EditBrand'
             });
         }
 
-        //修改
+        //删除
         function del() {
-            var datas = table.checkStatus('datas');
+            var datas = table.checkStatus('brands');
             if (!datas || datas.data.length > 1 || datas.data.length == 0) {
                 alertW("请选择一条数据！");
                 return;
             }
             var id = datas.data[0].Id;
             $.post("/Group/DeleteBrand", { "id": id }, function (ret) {
-                if (ret.Code < 0)
-                    alertF(ret.Msg);
+                if (ret.code < 0) {
+                    alertF(ret.msg);
+                }
                 else
-                    alertS(ret.Msg);
+                    loaddata();
+                alertS(ret.msg);
             })
         }
     </script>

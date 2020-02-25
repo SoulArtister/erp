@@ -1,0 +1,305 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/layui-v2.5.6/layui/css/layui.css" rel="stylesheet" />
+    <title>Index</title>
+</head>
+<body style="margin-top:50px">
+    <div style="padding:0 15px;background-color: #F2F2F2;">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-md6">
+                <div class="layui-card">
+                    <div class="layui-card-header">全局菜单</div>
+                    <div class="layui-card-body">
+                        <form class="layui-form">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">菜单大类</label>
+                                <div class="layui-input-block" style="width:65%">
+                                    <select id="menuType" lay-filter="mt" name="mt" lay-search>
+                                        <option value="1">集团</option>
+                                        <option value="2">营销</option>
+                                        <option value="3">供应</option>
+                                        <option value="4">财务</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="layui-btn-container">
+                            <button type="button" class="layui-btn layui-btn-normal" onclick="add()">新增同级</button>
+                            <button type="button" class="layui-btn layui-btn-normal" onclick="addc()">新增下级</button>
+                            <button type="button" class="layui-btn" id="btnedit" onclick="edit()">修改</button>
+                            <button type="button" class="layui-btn layui-btn-danger" onclick="del()">删除</button>
+                            <div class="layui-card-header" style="color: rgb(255,121,98)">菜单（字段顺序：名称，路径，图标，顺序号，隐藏，停用）</div>
+                            <div id="divchecked" class="layui-card-header" style="color: red">选中时，以最后选中项为准</div>
+                        </div>
+                        <div id="menutree" class="demo-tree"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-card">
+                    <div class="layui-card-header">按钮</div>
+                    <div class="layui-card-body">
+                        <div class="layui-btn-container">
+                            <button type="button" class="layui-btn layui-btn-normal" onclick="btnadd()">新增</button>
+                            <button type="button" class="layui-btn" onclick="btnedit()">修改</button>
+                            <button type="button" class="layui-btn layui-btn-danger" onclick="delbtn()">删除</button>
+                        </div>
+                        <table class="layui-hide" id="tbtn" lay-filter="btns"></table>
+                    </div>
+                </div>
+
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-card">
+                    <div class="layui-card-header">数据列</div>
+                    <div class="layui-card-body">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/Content/themes/jquery2.1.1.min.js"></script>
+    <script src="~/Content/layui-v2.5.6/layui/layui.js"></script>
+    <script>
+        var tree;
+        var cid;
+        var table;
+
+        layui.use(['tree', 'form', 'table'], function () {
+            tree = layui.tree;
+            table = layui.table;
+            var form = layui.form;
+
+            form.on('select(mt)', function () {
+                menutree();
+            });
+            menutree();
+        });
+
+        //查数据，渲染结构树
+        function menutree() {
+            var id = $("#menuType").val();
+
+            $.post("/Menu/QueryMenus", { topId: id }, function (data) {
+                if (data && data.length > 0) {
+                    //仅节点左侧图标控制收缩
+                    tree.render({
+                        elem: '#menutree'
+                        , id: 'tid'//lay渲染时用到的id
+                        , data: data
+                        , showCheckbox: true
+                        , onlyIconControl: true  //是否仅允许节点左侧图标控制展开收缩
+                        //, edit: ['add', 'update', 'del']
+                        //, operate: function (obj) {
+                        //    var type = obj.type;
+                        //    switch (type) {
+                        //        case "add": add(); break;
+                        //        case "update": edit(); break;
+                        //        case "del": del(); break;
+                        //    }
+                        //}
+                        //, click: function (obj) {
+                        //    alert(obj.data.id);
+                        //}
+                        , oncheck: function (obj) {
+                            if (obj.checked) {
+                                cid = obj.data.id;
+                                $("#divchecked").text("当前选中：" + obj.data.title);
+                                loadbtn();
+                            }
+                            else {
+                                cid = 0;
+                                $("#divchecked").text("");
+                            }
+                        }
+                    });
+                }
+            });
+        }
+
+        //新增
+        function add() {
+            if (!cid || typeof (cid) == 'undefined') {
+                alertW("请至少选中一条数据");
+                return;
+            }
+            layer.open({
+                title: "新增",
+                type: 2,
+                area: ['500px', '450px'],
+                fixed: false, //不固定
+                maxmin: false,
+                content: '/Menu/EditMenuView?id=0&pid=' + getPid($("#divchecked").text()) + '&tid=' + $("#menuType").val()
+            });
+        }
+
+        //新增下级
+        function addc() {
+            //var checkData = tree.getChecked('tid');
+            //var id = getLastNodeId(checkData);
+            if (!cid || typeof (cid) == 'undefined') {
+                alertW("请至少选中一条数据");
+                return;
+            }
+            layer.open({
+                title: "新增",
+                type: 2,
+                area: ['500px', '450px'],
+                fixed: false, //不固定
+                maxmin: false,
+                content: '/Menu/EditMenuView?id=0&pid=' + cid + '&tid=' + $("#menuType").val()
+            });
+        }
+
+        //修改
+        function edit() {
+            if (!cid || typeof (cid) == 'undefined') {
+                alertW("请至少选中一条数据");
+                return;
+            }
+            layer.open({
+                title: "修改",
+                type: 2,
+                area: ['500px', '450px'],
+                fixed: false, //不固定
+                maxmin: false,
+                content: '/Menu/EditMenuView?id=' + cid + "&pid=0" + '&tid=' + $("#menuType").val()
+            });
+        }
+
+        //删除
+        function del() {
+            if (!cid || typeof (cid) == 'undefined') {
+                alertW("请至少选中一条数据");
+                return;
+            }
+            $.post("/Menu/Delete", { id: cid }, function (ret) {
+                if (ret.code > 0) {
+                    alertS(ret.msg);
+                }
+                else {
+                    alertW(ret.msg);
+                    menutree();
+                }
+            });
+        }
+
+        //递归得到最下级，最后一个id
+        function getLastNodeId(data) {
+            var item;
+            if (data && data.length > 0) {
+                item = data[data.length - 1];
+                if (item.children) {
+                    var c1 = item.children;
+                    var id = getLastNodeId(c1);
+                    return id;
+                }
+                else
+                    return item.id;
+            }
+            else
+                return 0;
+        }
+
+        //获得上级id
+        function getPid(txt) {
+            var txts = txt.split('|');
+            return txts[3];
+        }
+
+        //加载按钮
+        function loadbtn() {
+            layui.use('table', function () {
+                if (!table)
+                    table = layui.table;
+
+                table.render({
+                    elem: '#tbtn'
+                    , url: '/Menu/GetBtns/'
+                    , method: 'post'
+                    , where: { mid: cid }
+                    , cols: [[
+                          { type: 'radio' }
+                        , { field: 'ButtonName', width: 120, title: '按钮名称' }
+                        , { field: 'FuncName', width: 130, title: '方法名称' }
+                        , { field: 'ClassName', width: 220, title: '样式类' }
+                        , { field: 'StopValue', width: 80, title: '停用' }
+                        , { field: 'MenuId', title: '', width: 0, hide: true }
+                    ]]
+                    ,even: true //开启隔行背景
+                });
+
+                //绑定时，用的lay-filter属性
+                table.on('rowDouble(btns)', function (obj) {
+                    var id = obj.data.Id;
+                    layer.open({
+                        title: "修改",
+                        type: 2,
+                        area: ['500px', '350px'],
+                        fixed: false, //不固定
+                        maxmin: false,
+                        content: '/Menu/BtnEditView?id=' + id + "&mid=0"
+                    });
+                });
+            });
+        }
+
+        //新增按钮
+        function btnadd() {
+            layer.open({
+                title: "新增",
+                type: 2,
+                area: ['500px', '350px'],
+                fixed: false, //不固定
+                maxmin: false,
+                content: '/Menu/BtnEditView?id=0&mid=' + cid 
+            });
+        }
+
+        //修改按钮
+        function btnedit() {
+            var datas = table.checkStatus('tbtn');
+            if (!datas || datas.data.length > 1 || datas.data.length == 0) {
+                alertW("请选择一条数据！");
+                return;
+            }
+            var id = datas.data[0].Id;
+            layer.open({
+                title: "修改",
+                type: 2,
+                area: ['500px', '350px'],
+                fixed: false, //不固定
+                maxmin: false,
+                content: '/Menu/BtnEditView?id=' + id + "&mid=0"
+            });
+        }
+
+        //删除按钮
+        function delbtn() {
+            var datas = table.checkStatus('tbtn');
+            if (!datas || datas.data.length > 1 || datas.data.length == 0) {
+                alertW("请选择一条数据！");
+                return;
+            }
+            var id = datas.data[0].Id;
+            $.post("/Menu/DeleteBtn", { id: id }, function (ret) {
+                if (ret.code > 0) {
+                    alertS(ret.msg);
+                    loadbtn();
+                }
+                else {
+                    alertW(ret.msg);
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

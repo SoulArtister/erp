@@ -1,0 +1,103 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/layui-v2.5.6/layui/css/layui.css" rel="stylesheet" />
+    <title>EditMenuView</title>
+</head>
+<body>
+    <div class="layui-fluid" style="">
+        <form class="layui-form " style="margin-top:15px;" lay-filter="btninfo">
+            <div class="layui-form-item">
+                <label class="layui-form-label">按钮名称</label>
+                <div class="layui-input-block">
+                    <input type="text" id="txtname" name="ButtonName" required autocomplete="off" class="layui-input" value="@ViewBag.Data.ButtonName" />
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">方法名</label>
+                <div class="layui-input-block">
+                    <input type="text" name="FuncName" required autocomplete="off" class="layui-input" value="@ViewBag.Data.FuncName" />
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">样式类</label>
+                <div class="layui-input-block">
+                    <input type="text" id="txtclassname" name="ClassName" required autocomplete="off" class="layui-input" value="@ViewBag.Data.ClassName" />
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">停用</label>
+                <div class="layui-input-block">
+                    <input type="checkbox" name="Stopping" lay-skin="switch" lay-text="是|否">
+                </div>
+            </div>
+            <div class="layui-form-item" style="display:none">
+                <label class="layui-form-label">Id</label>
+                <div class="layui-input-block">
+                    <input type="text" name="Id" required autocomplete="off" class="layui-input" />
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <input class="layui-btn layui-btn-form" onclick="save()" value="保存" />
+                    <input class="layui-btn layui-btn-primary layui-btn-form" onclick="cancel();" value="取消" />
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script src="~/Content/themes/jquery2.1.1.min.js"></script>
+    <script src="~/Content/layui-v2.5.6/layui/layui.js"></script>
+    <script src="~/Content/commonjs.js"></script>
+    <script>
+        var form;
+        $(function () {
+            layui.use('form', function () {
+                form = layui.form;
+                var isstop = '@ViewBag.Data.Stopping';
+                var id = '@ViewBag.Data.Id';
+                form.val('btninfo', {
+                    "Stopping": isstop == true,
+                    "Id": id
+                })
+            })
+        })
+
+        //保存
+        function save() {
+            var data = form.val('btninfo');
+            if (!data.ButtonName || data.ButtonName.length == 0) {
+                alertAbsorb("请填写名称", "txtname")
+                return false
+            } 
+            if (!data.ClassName || data.ClassName.length == 0) {
+                alertAbsorb("请填写样式名", "txtclassname")
+                return false
+            }
+            data.Stopping = data.Stopping == "on" ? true : false;
+            var mid = '@ViewBag.Data.MenuId';
+            data.MenuId = mid;
+            $.post("/Menu/SaveBtn", data, function (ret) {
+                if (ret.code < 0)
+                    alertF(ret.msg);
+                else {
+                    parent.loadbtn();
+                    alertS(ret.msg, function () {
+                        cancel();
+                    });
+                }
+            });
+        }
+
+        function cancel() {
+            parent.layer.closeAll();
+        }
+    </script>
+</body>
+</html>

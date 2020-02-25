@@ -45,6 +45,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entity\Group\Brand.cs" />
+    <Compile Include="Entity\Sys\Button.cs" />
+    <Compile Include="Entity\Sys\ButtonUserMap.cs" />
     <Compile Include="Entity\Sys\LoginLog.cs" />
     <Compile Include="Entity\Sys\EnvironmentSettings.cs" />
     <Compile Include="Entity\Sys\MenuUserMap.cs" />
@@ -52,6 +54,8 @@
     <Compile Include="Entity\Sys\Map_MenuChain.cs" />
     <Compile Include="Entity\Sys\Menu.cs" />
     <Compile Include="IRepository\IBrandR.cs" />
+    <Compile Include="IRepository\IButtonR.cs" />
+    <Compile Include="IRepository\IButtonUserMapR.cs" />
     <Compile Include="IRepository\IEnvironmentSettingsR.cs" />
     <Compile Include="IRepository\ILoginLogR.cs" />
     <Compile Include="IRepository\IMap_MenuChainR.cs" />

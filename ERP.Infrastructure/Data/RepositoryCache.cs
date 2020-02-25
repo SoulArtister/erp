@@ -63,6 +63,27 @@ namespace ERP.Infrastructure.Data
             }
         }
 
+        /// <summary>
+        /// 删除缓存
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public bool Del(string key)
+        {
+            using (var redis = new RedisClient(host, port))
+            {
+                try
+                {
+                    redis.Del(key);
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+        }
+
         public void Dispose() { }
     }
 }

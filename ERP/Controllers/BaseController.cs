@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace ERP.Controllers
 {
@@ -28,7 +29,7 @@ namespace ERP.Controllers
         /// 分析请求的控制器，方法名
         /// </summary>
         /// <param name="requestContext"></param>
-        protected override void Initialize(System.Web.Routing.RequestContext requestContext)
+        protected override void Initialize(RequestContext requestContext)
         {
             var routDic = requestContext.RouteData.Values;
             controlName = routDic["controller"].ToString();
@@ -43,7 +44,7 @@ namespace ERP.Controllers
             }
             base.Initialize(requestContext);
 
-            result = new ResResult<object>() { Code = 0, Msg = "操作成功", Data = string.Empty };
+            result = new ResResult<object>() { code = 0, msg = "操作成功", data = string.Empty };
         }
 
         /// <summary>
@@ -68,8 +69,8 @@ namespace ERP.Controllers
         /// <returns></returns>
         protected ResResult<object> ErrResult(string msg)
         {
-            result.Code = -2;
-            result.Msg = msg;
+            result.code = -2;
+            result.msg = msg;
             return result;
         }
 
@@ -80,8 +81,8 @@ namespace ERP.Controllers
         /// <returns></returns>
         protected ResResult<object> ExceptResult(string msg)
         {
-            result.Code = -4;
-            result.Msg = msg;
+            result.code = -4;
+            result.msg = msg;
             return result;
         }
 
@@ -92,7 +93,7 @@ namespace ERP.Controllers
         /// <returns></returns>
         protected JsonResult SuccessReturn()
         {
-            Log.InfoFormat(controlName, actionName, result.Msg);
+            Log.InfoFormat(controlName, actionName, result.msg);
             return Json(result);
         }
 
@@ -102,7 +103,7 @@ namespace ERP.Controllers
         /// <returns></returns>
         protected JsonResult ErrReturn(string errInfo = "")
         {
-            result.Msg = errInfo.FormatSub();
+            result.msg = errInfo.FormatSub();
             Log.InfoFormat(controlName, actionName, errInfo);
             return Json(result);
         }

@@ -43,6 +43,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BrandR.cs" />
+    <Compile Include="ButtonR.cs" />
+    <Compile Include="ButtonUserMapR.cs" />
     <Compile Include="EnvironmentSettingsR.cs" />
     <Compile Include="LoginLogR.cs" />
     <Compile Include="Map_MenuChainR.cs" />

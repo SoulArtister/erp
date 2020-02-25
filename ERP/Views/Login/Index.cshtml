@@ -75,12 +75,12 @@
             var user = $("#username").val();
             var password = $("#pass").val();
             $.post("/Login/Login", { chainNo: "", account: user, password: password }, function (data) {
-                if (data.Code == 0) {
+                if (data.code == 0) {
                     layer.msg("正在登录。。");
                     window.location.href = "/Home/Index";
                 }
                 else {
-                    alertF(data.Msg);
+                    alertF(data.msg);
                 }
             })
         }

@@ -49,8 +49,8 @@
             </div>
             <div class="layui-form-item">
                 <div class="layui-input-block">
-                    <input class="layui-btn layui-btn-normal" onclick="save()" value="保存" />
-                    <input class="layui-btn layui-btn-primary" onclick="cancel();" value="取消" />
+                    <input class="layui-btn layui-btn-normal layui-btn-form" onclick="save()" value="保存" />
+                    <input class="layui-btn layui-btn-primary layui-btn-form" onclick="cancel();" value="取消" />
                 </div>
             </div>
         </form>
@@ -78,11 +78,11 @@
             var data = form.val('brandinfo');
             data.Using = data.Using == "on" ? true : false;
             $.post("/Group/SaveBrand", data, function (ret) {
-                if (ret.Code < 0)
-                    alertF(ret.Msg);
+                if (ret.code < 0)
+                    alertF(ret.msg);
                 else {
                     parent.loaddata();
-                    alertS(ret.Msg, function () {
+                    alertS(ret.msg, function () {
                         cancel();
                     });
                 }

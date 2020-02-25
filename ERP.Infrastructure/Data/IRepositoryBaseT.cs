@@ -11,12 +11,12 @@ namespace ERP.Infrastructure.Data
     {
         void SetCacheKey(string key);
         bool IsExist(Expression<Func<TEntity, bool>> predicate);
-        int Insert(TEntity entity);
-        int Insert(List<TEntity> entitys);
-        int Insert(IEnumerable<TEntity> entitys);
-        int Update(TEntity entity);
-        int Delete(TEntity entity);
-        int Delete(Expression<Func<TEntity, bool>> predicate);
+        int Insert(TEntity entity, bool isCache = false);
+        int Insert(List<TEntity> entitys, bool isCache = false);
+        int Insert(IEnumerable<TEntity> entitys, bool isCache = false);
+        int Update(TEntity entity, bool isCache = false);
+        int Delete(TEntity entity, bool isCache = false);
+        int Delete(Expression<Func<TEntity, bool>> predicate, bool isCache = false);
         TEntity FindEntity(Expression<Func<TEntity, bool>> predicate, bool isCache = false);
         IList<TEntity> IQueryable(bool isCache = false);
         IList<TEntity> IQueryable(Expression<Func<TEntity, bool>> predicate, bool isCache = false);

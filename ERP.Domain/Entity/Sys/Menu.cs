@@ -16,12 +16,12 @@ namespace ERP.Domain.Entity
     public partial class Menu : IEntityValue
     {
         #region Model
-        private int _Id;
+        private int _Id = 0;
         private string _MemuNo;
         private string _MenuName;
         private string _UrlRoute;
         private string _IniParam;
-        private int? _Sno;
+        private int? _Sno = 0;
         private string _Icon;
         private bool? _Hiding;
         private bool? _Stopping;

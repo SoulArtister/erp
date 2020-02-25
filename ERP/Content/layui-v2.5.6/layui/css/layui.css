@@ -1014,7 +1014,7 @@ a {
 .layui-fluid {
     position: relative;
     margin: 0 auto;
-    padding: 0 15px;
+    padding: 0 15px 0 5px;
 }
 
 .layui-row:after, .layui-row:before {
@@ -2008,6 +2008,11 @@ a {
     vertical-align: middle;\9
 }
 
+.layui-btn-form {
+    margin:15px 0 0 2%;
+    width:120px;
+}
+
 .layui-btn-primary {
     border: 1px solid #C9C9C9;
     background-color: #fff;
@@ -2995,8 +3000,8 @@ a {
         background-color: #f2f2f2;
     }
 
-    .layui-table tbody tr:hover, .layui-table-hover,.layui-table-click {
-        background-color: #dfe2eb  !important;
+    .layui-table tbody tr:hover, .layui-table-hover, .layui-table-click {
+        background-color: #dfe2eb !important;
     }
 
     .layui-table td, .layui-table th, .layui-table-col-set, .layui-table-fixed-r, .layui-table-grid-down, .layui-table-header, .layui-table-page, .layui-table-tips-main, .layui-table-tool, .layui-table-total, .layui-table-view, .layui-table[lay-skin=line], .layui-table[lay-skin=row] {
@@ -5066,11 +5071,11 @@ body .layui-util-face {
     background-color: rgba(0,0,0,0);
 }
 
-    .layui-tree-line .layui-tree-entry:hover .layui-tree-txt {
-        color: #999;
-        text-decoration: underline;
-        transition: .3s;
-    }
+.layui-tree-line .layui-tree-entry:hover .layui-tree-txt {
+    color: rgb(255,121,78); /*#999;*/
+    text-decoration: underline;
+    transition: .3s;
+}
 
 .layui-tree-main {
     cursor: pointer;

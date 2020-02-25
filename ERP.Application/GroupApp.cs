@@ -21,7 +21,7 @@ namespace ERP.Application
         {
             try
             {
-                return new BrandR().FindList(i => 1 == 1, true);
+                return new BrandR().FindList(i => 1 == 1);
             }
             catch
             {
