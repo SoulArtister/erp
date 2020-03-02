@@ -27,7 +27,9 @@ namespace ERP.Infrastructure.Data
          ***********************上面是dos.orm实现******************************
          ************************下面是dapper实现******************************
          */
-        string QueryValue(string sql, object param, bool isCache = false);
+
+        int QueryintValue(string sql, object param, bool isCache = false);
+        string QueryStringValue(string sql, object param, bool isCache = false);
 
         TEntity QueryEntity(string sql, object param, bool isCache = false);
 

@@ -5,8 +5,12 @@ var iframeid = "0";
 tabmenus.push('0');
 //添加和删除tabul和tabmenus数组
 function gotoPage(id, url, menuname) {
+    var urlsplit = url.split('?');
+    var urlunparam = "";
+    if (urlsplit.length > 0)
+        urlunparam = urlsplit[0].trim();
     // 如果数组中不存在
-    if ($.inArray(id, tabmenus) == -1 && url.length > 0 && url != " ") {
+    if ($.inArray(id, tabmenus) == -1 && url.length > 0 && urlunparam.length > 0) {
         if (tabmenus.length + 1 <= 10) {
             addTab(id, url, menuname)
         } else {

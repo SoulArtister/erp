@@ -40,13 +40,11 @@ namespace ERP.Controllers
             {
                 return Json(base.ErrResult("用户名或密码错误"));
             }
-            RepMenuApp rmApp = new RepMenuApp();
-            var menuList = rmApp.MenuList(account);
-            if (menuList == null || menuList.Count == 0)
+            if (!new RepMenuApp().IsHaveMenuResponse(account))
                 return Json(base.ErrResult("无权限"));
 
             string timeStamp = DataTrans.GetTimeStamp();
-            WriteSession(menuList, user, timeStamp);
+            WriteSession(user, timeStamp);
             SysLog(user.Account, timeStamp);
             WebHelper.UserToApplication(user.Account);
 
@@ -60,9 +58,8 @@ namespace ERP.Controllers
         /// </summary>
         /// <param name="menuList"></param>
         /// <param name="user"></param>
-        private void WriteSession(IList<Menu> menuList, User user, string timeStamp)
+        private void WriteSession(User user, string timeStamp)
         {
-            WebHelper.WriteSession("menus", menuList.ObjectToJson());
             WebHelper.WriteSession("username", user.UserName);
             WebHelper.WriteSession("useraccount", user.Account);
             WebHelper.WriteSession("timestamp", timeStamp);

@@ -16,20 +16,48 @@ namespace ERP.Application
         #region 菜单
 
         /// <summary>
-        /// 用户菜单列表
+        /// 是否有菜单权限
         /// </summary>
         /// <param name="account"></param>
         /// <returns></returns>
-        public IList<Menu> MenuList(string account)
+        public bool IsHaveMenuResponse(string account)
         {
-            IMenuR menuR = new MenuR();
-            //权限最大
-            if (account.Equals("@ADMIN"))
-                return menuR.IQueryable(i => i.TopMenuId > 0);
-            //除系统级外都显示
-            if (account.Equals("ADMIN"))
-                return menuR.IQueryable(i => i.TopMenuId > 0 && i.Hiding == false && i.Stopping == false);
-            return menuR.GetMenuList(account);
+            try
+            {
+                if (account.Equals("@ADMIN") || account.Equals("ADMIN"))
+                    return true;
+                return new MenuR().IsHaveMenu(account);
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 用户菜单列表
+        /// 带用户权限
+        /// </summary>
+        /// <param name="account"></param>
+        /// <returns></returns>
+        public IList<Menu> MenuList(string account, int topId)
+        {
+            try
+            {
+                IMenuR menuR = new MenuR();
+                //权限最大
+                if (account.Equals("@ADMIN"))
+                    return menuR.IQueryable(i => i.TopMenuId == topId);
+                //除系统级外都显示
+                if (account.Equals("ADMIN"))
+                    return menuR.IQueryable(i => i.TopMenuId == topId && i.Hiding == false && i.Stopping == false);
+                return menuR.GetMenuList(account, topId);
+            }
+            catch
+            {
+                return null;
+            }
+
         }
 
         /// <summary>
@@ -59,9 +87,9 @@ namespace ERP.Application
         /// 获得大菜单
         /// </summary>
         /// <returns></returns>
-        public Menu GetTopMenus()
+        public IList<Menu> GetTopMenus()
         {
-            return new MenuR().FindEntity(i => i.TopMenuId == 0);
+            return new MenuR().FindList(i => i.TopMenuId == 0);
         }
 
         /// <summary>

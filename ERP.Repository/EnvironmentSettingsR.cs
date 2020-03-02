@@ -18,7 +18,7 @@ namespace ERP.Repository
         public string GetInfo(string code)
         {
             const string sql = "select paramvalue from Sys_EnvironmentSettings where paramcode=@code";
-            return QueryValue(sql, new { code = code });
+            return QueryStringValue(sql, new { code = code });
         }
     }
 }

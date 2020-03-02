@@ -9,6 +9,6 @@ namespace ERP.Domain.IRepository
 {
     public interface IMenuR : IRepositoryBaseT<Menu>
     {
-        IList<Menu> GetMenuList(string account);
+        IList<Menu> GetMenuList(string account,int topId);
     }
 }

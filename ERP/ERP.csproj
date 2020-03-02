@@ -183,6 +183,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\Bills\BuyInController.cs" />
     <Compile Include="Controllers\group\GroupController.cs" />
     <Compile Include="Controllers\group\OrganizeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -431,6 +432,7 @@
     <Content Include="Views\Menu\Index.cshtml" />
     <Content Include="Views\Menu\EditMenuView.cshtml" />
     <Content Include="Views\Menu\BtnEditView.cshtml" />
+    <Content Include="Views\BuyIn\NewBill.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -48,45 +48,25 @@
             <!-- 侧边菜单 -->
             <div class="layui-side layui-side-menu">
                 <div class="layui-side-scroll">
-                    <a class="layui-logo" href="~/Login/Index">
-                        <span>Hoc ERP</span>
-                    </a>
-                    <ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu" lay-filter="layadmin-system-side-menu">
-                        @{
-                            var list = ERP.Infrastructure.Common.WebHelper.GetSessionList<ERP.Domain.Entity.Menu>("menus");
-                            foreach (var item in list.Where(i => i.ParentId == i.TopMenuId))
-                            {
-                                var lid = "menu" + item.Id;
-                                string urlandparam = "";
-                                if (string.IsNullOrWhiteSpace(item.IniParam))
-                                {
-                                    urlandparam = item.UrlRoute + "?id=" + item.Id;
-                                }
-                                string iconname = "layui-icon layui-icon-" + item.Icon;
-                                <li id="@lid" data-name="@item.Icon" class="layui-nav-item">
-                                    <a href="javascript:void(0);" lay-tips="@item.UrlRoute" lay-direction="2" onclick="gotoPage('@item.Id', '@urlandparam', '@item.MenuName')">
-                                        <i class="@iconname"></i>
-                                        <cite>@item.MenuName</cite>
-                                    </a>
+                    @*<a class="layui-logo" href="~/Login/Index">
+                            <span>Hoc ERP</span>
+                        </a>*@
+                    <form class="layui-form">
+                        <div class="layui-form-item">
+                            <div class="layui-input-inline" style="width:65%;color:#555;margin-left:15px;line-height:10px;">
+                                <select id="menuType" lay-filter="mt" name="mt" lay-search>
                                     @{
-                                var childs = list.Where(i => i.ParentId == item.Id).OrderBy(i => i.Sno).ToList();
-                                if (childs != null && childs.Count > 0)
-                                {
-                                    <dl class="layui-nav-child">
-                                        @foreach (var c in childs)
+                                        var tlist = new ERP.Application.RepMenuApp().GetTopMenus();
+                                        foreach (var item in tlist)
                                         {
-                                            var did = "menu" + c.Id;
-                                            <dd data-name="console" id="@did">
-                                                <a lay-href="javascript:void(0);" onclick="gotoPage('@c.Id', '@c.UrlRoute', '@c.MenuName')">@c.MenuName</a>
-                                            </dd>
+                                            <option value="@item.Id">@item.MenuName</option>
                                         }
-                                    </dl>
-                                }
                                     }
-                                </li>
-                            }
-                        }
-                    </ul>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                    <ul id="mul" class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu" lay-filter="layadmin-system-side-menu"></ul>
                 </div>
             </div>
 
@@ -130,6 +110,27 @@
     <script src="~/Content/layui-v2.5.6/layui/layui.js"></script>
     <script src="~/Content/home.js"></script>
     <script>
+        var layelement;
+        layui.use(['layer', 'form', 'element'], function () {
+            layelement = layui.element;
+            var layer = layui.layer,
+                       form = layui.form;
+            form.on('select(mt)', function () {
+                loadmenu();
+            });
+            loadmenu();
+        });
+
+        function loadmenu() {
+            var id = $("#menuType").val();
+            $.post("/Home/MenuHtml", { topId: id }, function (ret) {
+                if (ret.code == 0) {
+                    $("#mul").html(ret.data);
+                   layelement.init();//初始化，重新渲染
+                }
+            })
+        }
+
         $(function () {
             var unname = '@ERP.Infrastructure.Common.WebHelper.GetSession("username")';
             $("#uname").text(unname);
@@ -145,19 +146,12 @@
                     $("#LAY_app_flexible").removeClass("layui-icon-shrink-right");
                     $("#LAY_app_flexible").addClass("layui-icon-spread-left");
                 }
-
             })
 
             //退出
             $("#aexit").click(function () {
                 window.history.forward(2);
                 window.location.replace("../../Login/Index");
-            });
-
-            layui.use(['layer', 'form', 'element'], function () {
-                var layer = layui.layer,
-                       form = layui.form,
-                       element = layui.element;
             });
 
             //登录互斥检测
