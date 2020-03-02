@@ -26,7 +26,7 @@ namespace ERP.Repository
                                         and b.TopMenuId>0
                                         and Hiding=0
                                         and Stopping=0";//左侧主要菜单
-            return QueryintValue(sql, new { Account = account }) > 0;
+            return QueryIntValue(sql, new { Account = account }) > 0;
         }
 
         /// <summary>

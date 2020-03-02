@@ -66,7 +66,7 @@
                             </div>
                         </div>
                     </form>
-                    <ul id="mul" class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu" lay-filter="layadmin-system-side-menu"></ul>
+                    <ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu" lay-filter="layadmin-system-side-menu"></ul>
                 </div>
             </div>
 
@@ -125,7 +125,7 @@
             var id = $("#menuType").val();
             $.post("/Home/MenuHtml", { topId: id }, function (ret) {
                 if (ret.code == 0) {
-                    $("#mul").html(ret.data);
+                    $("#LAY-system-side-menu").html(ret.data);
                    layelement.init();//初始化，重新渲染
                 }
             })

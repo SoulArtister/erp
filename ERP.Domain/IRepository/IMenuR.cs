@@ -9,6 +9,7 @@ namespace ERP.Domain.IRepository
 {
     public interface IMenuR : IRepositoryBaseT<Menu>
     {
+        bool IsHaveMenu(string account);
         IList<Menu> GetMenuList(string account,int topId);
     }
 }

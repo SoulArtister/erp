@@ -103,7 +103,7 @@ namespace ERP.Infrastructure.Data
          ************************下面是dapper实现******************************
          */
 
-        public int QueryintValue(string sql, object param, bool isCache = false)
+        public int QueryIntValue(string sql, object param, bool isCache = false)
         {
             using (var con = OpenConnection())
             {
